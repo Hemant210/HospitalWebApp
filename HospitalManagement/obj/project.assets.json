@@ -8627,23 +8627,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ASUS\\.nuget\\packages\\": {},
+    "C:\\Users\\digit\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ICT2\\C# Application\\HospitalManagement\\HospitalManagement\\HospitalManagement.csproj",
+      "projectUniqueName": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
       "projectName": "HospitalManagement",
-      "projectPath": "D:\\ICT2\\C# Application\\HospitalManagement\\HospitalManagement\\HospitalManagement.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "D:\\ICT2\\C# Application\\HospitalManagement\\HospitalManagement\\obj\\",
+      "projectPath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
+      "packagesPath": "C:\\Users\\digit\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\digit\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8729,7 +8729,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
