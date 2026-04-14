@@ -1,6 +1,8 @@
+using HospitalManagement.Data;
 using HospitalManagement.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace HospitalManagement.Controllers
@@ -8,16 +10,30 @@ namespace HospitalManagement.Controllers
     [Authorize] // Requires login to view the dashboard
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly HospitalDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        // Inject the database context
+        public HomeController(HospitalDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            // You can pass dashboard statistics (like Total Patients) to the view later
+            // 1. Count Total Patients
+            ViewBag.TotalPatients = await _context.Patients.CountAsync();
+
+            // 2. Count Beds where Status is "Available"
+            ViewBag.AvailableBeds = await _context.Beds.CountAsync(b => b.Status == BedStatus.Available);
+
+            // 3. Count Appointments scheduled for Today
+            ViewBag.TodaysAppointments = await _context.Appointments
+                .CountAsync(a => a.AppointmentDate.Date == DateTime.Today.Date);
+
+            // 4. Count Lab Tests that are still "Pending"
+            ViewBag.PendingLabs = await _context.LabTests
+                .CountAsync(l => l.Status == LabTestStatus.Pending);
+
             return View();
         }
 
