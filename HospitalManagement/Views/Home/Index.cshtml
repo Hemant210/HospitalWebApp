@@ -1,0 +1,130 @@
+﻿@* @{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid px-4 mt-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Hospital Overview</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Total Patients</h5>
+                    <h2 class="display-6 fw-bold">142</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" asp-controller="Patients" asp-action="Index">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Available Beds</h5>
+                    <h2 class="display-6 fw-bold">18</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Today's Appointments</h5>
+                    <h2 class="display-6 fw-bold">24</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Lab Tests</h5>
+                    <h2 class="display-6 fw-bold">7</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
+
+
+
+
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid pt-3">
+    <h1 class="mt-2 fw-bold text-dark">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Hospital Overview</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-hospital-user me-2"></i>Total Patients</h5>
+                    <h2 class="display-6 fw-bold">142</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between border-top-0" style="background-color: rgba(0,0,0,0.1);">
+                    <a class="small text-white stretched-link text-decoration-none" asp-controller="Patients" asp-action="Index">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-bed me-2"></i>Available Beds</h5>
+                    <h2 class="display-6 fw-bold">18</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between border-top-0" style="background-color: rgba(0,0,0,0.1);">
+                    <a class="small text-white stretched-link text-decoration-none" asp-controller="Beds" asp-action="Index">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-dark mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-regular fa-calendar-check me-2"></i>Appointments</h5>
+                    <h2 class="display-6 fw-bold">24</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between border-top-0" style="background-color: rgba(0,0,0,0.05);">
+                    <a class="small text-dark stretched-link text-decoration-none" asp-controller="Appointments" asp-action="Index">View Details</a>
+                    <div class="small text-dark"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white mb-4 shadow-sm border-0">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-flask-vial me-2"></i>Pending Labs</h5>
+                    <h2 class="display-6 fw-bold">7</h2>
+                </div>
+                <div class="card-footer d-flex align-items-center justify-content-between border-top-0" style="background-color: rgba(0,0,0,0.1);">
+                    <a class="small text-white stretched-link text-decoration-none" asp-controller="LabTests" asp-action="Index">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

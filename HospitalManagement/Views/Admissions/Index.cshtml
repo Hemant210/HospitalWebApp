@@ -1,0 +1,76 @@
+﻿@model IEnumerable<HospitalManagement.Models.Admission>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AdmitDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DischargeDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdmitDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DischargeDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reason)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patient.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bed.BedId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.AdmissionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.AdmissionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.AdmissionId">Delete</a>
+
+                    @if (item.DischargeDate != null)
+                    {
+                        <a asp-controller="Bills" asp-action="GenerateFromAdmission" asp-route-id="@item.AdmissionId" class="btn btn-sm btn-success">
+                            <i class="fa-solid fa-file-invoice-dollar"></i> Generate Bill
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="badge bg-warning text-dark">Admitted</span>
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
