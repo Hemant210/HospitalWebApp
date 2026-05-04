@@ -31,6 +31,8 @@ namespace HospitalManagement.Data
             await Seed(userManager, "patient@hospital.com", "Patient@123", "Raj Kumar", HospitalRoles.Patient);
         }
 
+        //private seeder access there
+
         private static async Task Seed(UserManager<AppUser> um,
             string email, string password, string fullName, string role)
         {
