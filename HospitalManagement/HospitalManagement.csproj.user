@@ -14,8 +14,8 @@
     <WebStackScaffolding_DbContextTypeFullName>HospitalManagement.Data.HospitalDbContext</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <WebStackScaffolding_ViewDialogWidth>650.4</WebStackScaffolding_ViewDialogWidth>
-    <_SelectedScaffolderID>MvcControllerWithContextScaffolder</_SelectedScaffolderID>
+    <WebStackScaffolding_ViewDialogWidth>650.666666666667</WebStackScaffolding_ViewDialogWidth>
+    <_SelectedScaffolderID>RazorViewEmptyScaffolder</_SelectedScaffolderID>
     <_SelectedScaffolderCategoryPath>root/Common</_SelectedScaffolderCategoryPath>
   </PropertyGroup>
 </Project>

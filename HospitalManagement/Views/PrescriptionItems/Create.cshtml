@@ -1,46 +1,63 @@
 ﻿@model HospitalManagement.Models.PrescriptionItem
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Medicine to Prescription";
 }
 
-<h1>Create</h1>
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-capsules me-2"></i>Add Medicine to Prescription</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>PrescriptionItem</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PrescriptionId" class="control-label"></label>
-                <select asp-for="PrescriptionId" class ="form-control" asp-items="ViewBag.PrescriptionId"></select>
+                        <div class="form-group mb-3 border-bottom pb-3">
+                            <label asp-for="PrescriptionId" class="control-label fw-bold text-muted small text-uppercase">Prescription Number (RX)</label>
+                            <input asp-for="PrescriptionId" class="form-control bg-light fw-bold" readonly tabindex="-1" />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="MedicineId" class="control-label fw-bold mb-1">Select Medicine</label>
+                            <select asp-for="MedicineId" class="form-select" asp-items="ViewBag.MedicineId">
+                                <option value="">-- Choose from Pharmacy --</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Dosage" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="Dosage" class="form-control" placeholder="e.g., 2 Pills, 10ml" />
+                                <span asp-validation-for="Dosage" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DurationDays" class="control-label fw-bold mb-1"></label>
+                                <div class="input-group">
+                                    <input asp-for="DurationDays" class="form-control" placeholder="e.g., 5" />
+                                    <span class="input-group-text">Days</span>
+                                </div>
+                                <span asp-validation-for="DurationDays" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-2">
+                            <button type="submit" class="btn btn-success fw-bold"><i class="fa-solid fa-plus me-2"></i> Add to Prescription</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="MedicineId" class="control-label"></label>
-                <select asp-for="MedicineId" class ="form-control" asp-items="ViewBag.MedicineId"></select>
+            <div class="mt-3 text-center">
+                <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-arrow-left me-1"></i> Cancel</a>
             </div>
-            <div class="form-group">
-                <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" />
-                <span asp-validation-for="Dosage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DurationDays" class="control-label"></label>
-                <input asp-for="DurationDays" class="form-control" />
-                <span asp-validation-for="DurationDays" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

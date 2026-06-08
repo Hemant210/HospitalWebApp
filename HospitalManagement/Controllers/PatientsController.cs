@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HospitalManagement.Controllers
 {
-    [Authorize(Roles = HospitalRoles.AllStaff)]
+    [Authorize(Roles = HospitalRoles.Admin + "," + HospitalRoles.Receptionist + "," + HospitalRoles.Doctor)]
     public class PatientsController : Controller
     {
         private readonly HospitalDbContext _context;

@@ -49,15 +49,38 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: Prescriptions/Create
-        public IActionResult Create()
+        //public IActionResult Create()
+        //{
+        //    ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName");
+        //    return View();
+        //}
+
+
+        // GET: Prescriptions/Create
+        public IActionResult Create(int? recordId)
         {
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName");
+
+            // UPGRADE: Fetch the Patient's name so the dropdown shows "Record #1 - John Doe" instead of just "1"
+            var records = _context.MedicalRecords.Include(m => m.Patient).ToList();
+            var recordList = records.Select(r => new {
+                RecordId = r.RecordId,
+                Display = $"Record #{r.RecordId} - {r.Patient?.FirstName} {r.Patient?.LastName}"
+            });
+
+            if (recordId.HasValue)
+            {
+                ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display", recordId);
+            }
+            else
+            {
+                ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display");
+            }
+
             return View();
         }
 
         // POST: Prescriptions/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PrescriptionId,RecordId,DoctorId,PrescribedDate,Notes")] Prescription prescription)
@@ -66,9 +89,20 @@ namespace HospitalManagement.Controllers
             {
                 _context.Add(prescription);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                // BUG FIX: Send the doctor straight back to the Patient's Medical Record!
+                return RedirectToAction("Details", "MedicalRecords", new { id = prescription.RecordId });
             }
+
+            // If the form fails, we must reload the smart dropdowns
+            var records = _context.MedicalRecords.Include(m => m.Patient).ToList();
+            var recordList = records.Select(r => new {
+                RecordId = r.RecordId,
+                Display = $"Record #{r.RecordId} - {r.Patient?.FirstName} {r.Patient?.LastName}"
+            });
+
             ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName", prescription.DoctorId);
+            ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display", prescription.RecordId);
             return View(prescription);
         }
 

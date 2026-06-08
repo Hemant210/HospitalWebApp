@@ -50,16 +50,24 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: PrescriptionItems/Create
-        public IActionResult Create()
+        public IActionResult Create(int? prescriptionId) // SMART FIX: Catch the ID from the URL
         {
+            // Dropdown for the physical medicines in your pharmacy
             ViewData["MedicineId"] = new SelectList(_context.Medicines, "MedicineId", "Name");
-            ViewData["PrescriptionId"] = new SelectList(_context.Prescriptions, "PrescriptionId", "PrescriptionId");
+
+            if (prescriptionId.HasValue)
+            {
+                ViewData["PrescriptionId"] = new SelectList(_context.Prescriptions, "PrescriptionId", "PrescriptionId", prescriptionId);
+            }
+            else
+            {
+                ViewData["PrescriptionId"] = new SelectList(_context.Prescriptions, "PrescriptionId", "PrescriptionId");
+            }
+
             return View();
         }
 
         // POST: PrescriptionItems/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ItemId,PrescriptionId,MedicineId,Dosage,DurationDays")] PrescriptionItem prescriptionItem)
@@ -68,8 +76,17 @@ namespace HospitalManagement.Controllers
             {
                 _context.Add(prescriptionItem);
                 await _context.SaveChangesAsync();
+
+                // SMART FLOW FIX: Find the parent prescription so we can redirect the doctor back to the correct Medical Record!
+                var parentRx = await _context.Prescriptions.FindAsync(prescriptionItem.PrescriptionId);
+                if (parentRx != null)
+                {
+                    return RedirectToAction("Details", "MedicalRecords", new { id = parentRx.RecordId });
+                }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["MedicineId"] = new SelectList(_context.Medicines, "MedicineId", "Name", prescriptionItem.MedicineId);
             ViewData["PrescriptionId"] = new SelectList(_context.Prescriptions, "PrescriptionId", "PrescriptionId", prescriptionItem.PrescriptionId);
             return View(prescriptionItem);

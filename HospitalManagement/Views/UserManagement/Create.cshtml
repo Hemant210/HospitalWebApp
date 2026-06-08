@@ -1,0 +1,67 @@
+﻿@model HospitalManagement.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Add New Staff Member";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user-plus me-2"></i>Register New Staff Account</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="FullName" class="control-label fw-bold mb-1"></label>
+                            <input asp-for="FullName" class="form-control" placeholder="e.g. Dr. Amit Sharma or Nurse Mary" />
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Email" class="control-label fw-bold mb-1"></label>
+                            <input asp-for="Email" class="form-control" type="email" placeholder="staffname@hospital.com" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Role" class="control-label fw-bold mb-1">System Security Role</label>
+                            <select asp-for="Role" class="form-select" asp-items="ViewBag.Roles">
+                                <option value="">-- Assign a System Role --</option>
+                            </select>
+                            <span asp-validation-for="Role" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Password" class="control-label fw-bold mb-1"></label>
+                            <input asp-for="Password" class="form-control" type="password" placeholder="Min 6 chars (Digit, Upper, Special)" />
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="ConfirmPassword" class="control-label fw-bold mb-1"></label>
+                            <input asp-for="ConfirmPassword" class="form-control" type="password" placeholder="Retype chosen password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold"><i class="fa-solid fa-save me-2"></i>Create Staff Account</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel & Return</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

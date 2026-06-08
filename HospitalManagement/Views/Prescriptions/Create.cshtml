@@ -1,4 +1,4 @@
-﻿@model HospitalManagement.Models.Prescription
+﻿@* @model HospitalManagement.Models.Prescription
 
 @{
     ViewData["Title"] = "Create";
@@ -44,4 +44,70 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@
+
+
+
+
+
+@model HospitalManagement.Models.Prescription
+
+@{
+    ViewData["Title"] = "Write Prescription";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-prescription me-2"></i>Write New Prescription</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RecordId" class="control-label fw-bold mb-1">Medical Record ID</label>
+                                <select asp-for="RecordId" class="form-select bg-light" asp-items="ViewBag.RecordId"></select>
+                                <span asp-validation-for="RecordId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorId" class="control-label fw-bold mb-1">Prescribing Doctor</label>
+                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId"></select>
+                                <span asp-validation-for="DoctorId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="PrescribedDate" class="control-label fw-bold mb-1">Date</label>
+                            <input asp-for="PrescribedDate" class="form-control" type="date" />
+                            <span asp-validation-for="PrescribedDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Notes" class="control-label fw-bold mb-1">Pharmacy / Clinical Notes (Optional)</label>
+                            <textarea asp-for="Notes" class="form-control" rows="3" placeholder="e.g., Take after meals..."></textarea>
+                            <span asp-validation-for="Notes" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success fw-bold"><i class="fa-solid fa-check me-2"></i> Save Prescription</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-3">
+                <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-arrow-left me-1"></i> Go Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
