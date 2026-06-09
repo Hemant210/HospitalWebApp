@@ -1,4 +1,4 @@
-﻿@model HospitalManagement.Models.Department
+﻿@* @model HospitalManagement.Models.Department
 
 @{
     ViewData["Title"] = "Create";
@@ -40,4 +40,67 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+} *@
+
+
+
+@model HospitalManagement.Models.Department
+
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-building-circle-plus me-2"></i>Create New Department
+                    </h5>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="DeptName" class="control-label fw-bold mb-1">Department Name</label>
+                            <input asp-for="DeptName" class="form-control" placeholder="e.g. Cardiology, Pediatrics" />
+                            <span asp-validation-for="DeptName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Location" class="control-label fw-bold mb-1">Location / Floor</label>
+                            <input asp-for="Location" class="form-control" placeholder="e.g. Wing B, 3rd Floor" />
+                            <span asp-validation-for="Location" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="HeadDoctorId" class="control-label fw-bold mb-1">Head Doctor Staff ID (Optional)</label>
+                            <input asp-for="HeadDoctorId" class="form-control" type="number" placeholder="Enter assigned doctor's numeric system ID" />
+                            <span asp-validation-for="HeadDoctorId" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2">
+                                <i class="fa-solid fa-floppy-disk me-2"></i>Save New Department
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">
+                                <i class="fa-solid fa-arrow-left me-1"></i>Cancel & Return
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

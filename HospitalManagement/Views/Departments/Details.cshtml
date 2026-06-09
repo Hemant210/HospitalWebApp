@@ -1,0 +1,63 @@
+﻿@model HospitalManagement.Models.Department
+
+@{
+    ViewData["Title"] = "Department Overview";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-circle-info me-2"></i>Department Specification File
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Department Name</div>
+                        <div class="col-sm-8 text-dark fw-bold fs-5">@Model.DeptName</div>
+                    </div>
+                    <hr class="text-muted" />
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Campus Location</div>
+                        <div class="col-sm-8 text-secondary">
+                            <i class="fa-solid fa-map-location-dot me-1 text-primary"></i>@Model.Location
+                        </div>
+                    </div>
+                    <hr class="text-muted" />
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Chief Medical Officer</div>
+                        <div class="col-sm-8">
+                            @if (Model.HeadDoctorId.HasValue)
+                            {
+                                <span class="badge bg-light text-dark border fs-6 fw-normal">
+                                    <i class="fa-solid fa-user-md text-info me-1"></i>Staff Record ID: #@Model.HeadDoctorId
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="text-muted italic small">No Chief Executive Assigned</span>
+                            }
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a asp-action="Edit" asp-route-id="@Model.DepartmentId" class="btn btn-primary fw-bold w-100 py-2">
+                                <i class="fa-solid fa-user-pen me-2"></i>Edit Profile
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">
+                                <i class="fa-solid fa-arrow-left me-1"></i>Return to Directory
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
