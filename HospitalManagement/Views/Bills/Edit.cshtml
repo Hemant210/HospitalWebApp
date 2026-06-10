@@ -1,0 +1,71 @@
+﻿@model HospitalManagement.Models.Bill
+
+@{
+    ViewData["Title"] = "Update Payment";
+    var balanceDue = Model.TotalAmount - Model.PaidAmount;
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 border-top border-success border-4">
+                <div class="card-header bg-white py-3 text-center">
+                    <h4 class="mb-0 fw-bold text-success"><i class="fa-solid fa-cash-register me-2"></i>Receive Payment</h4>
+                    <p class="text-muted small mb-0 mt-1">Invoice Reference: INV-#@Model.BillId</p>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h1 class="display-4 fw-bold text-dark mb-0">₹@balanceDue.ToString("N2")</h1>
+                    <p class="text-danger fw-bold text-uppercase small mb-4">Current Balance Due</p>
+
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="BillId" />
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="AdmissionId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+                        <input type="hidden" asp-for="DoctorFee" />
+                        <input type="hidden" asp-for="RoomCharges" />
+                        <input type="hidden" asp-for="LabCharges" />
+                        <input type="hidden" asp-for="MedicineCharges" />
+                        <input type="hidden" asp-for="BillDate" />
+                        <input type="hidden" asp-for="TotalAmount" />
+
+                        <div class="form-group mb-3 text-start">
+                            <label asp-for="PaidAmount" class="control-label fw-bold mb-1">Update Total Paid Amount</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light text-success fw-bold">₹</span>
+                                <input asp-for="PaidAmount" class="form-control fw-bold text-success" type="number" step="0.01" />
+                            </div>
+                            <small class="text-muted">Enter the *total* cumulative amount collected to date.</small>
+                            <span asp-validation-for="PaidAmount" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row text-start">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Discount" class="control-label fw-bold mb-1">Discount</label>
+                                <input asp-for="Discount" class="form-control" type="number" step="0.01" />
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="PaymentMode" class="control-label fw-bold mb-1">Payment Method</label>
+                                <select asp-for="PaymentMode" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.PaymentMode>()">
+                                    <option value="">-- Mode --</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-vault me-2"></i>Settle Account</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary mt-1">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,135 +1,106 @@
-﻿
-                @model HospitalManagement.Models.Bill
+﻿@model HospitalManagement.Models.Bill
 
 @{
-    ViewData["Title"] = "Review & Create Bill";
+    ViewData["Title"] = "Generate Invoice";
 }
 
 <div class="container mt-4 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0"><i class="fa-solid fa-file-invoice-dollar me-2"></i>Review & Generate Bill</h4>
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0 border-top border-primary border-4">
+                <div class="card-header bg-white py-3">
+                    <h4 class="mb-0 fw-bold text-dark"><i class="fa-solid fa-file-invoice-dollar text-primary me-2"></i>Review & Generate Bill</h4>
                 </div>
                 <div class="card-body p-4">
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                        <div class="row mb-4 pb-3 border-bottom">
-                            <div class="col-md-4 mb-2">
-                                <label asp-for="PatientId" class="control-label fw-bold text-muted small text-uppercase"></label>
-                                <input asp-for="PatientId" class="form-control bg-light text-muted" readonly tabindex="-1" />
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="AdmissionId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+
+                        <div class="row bg-light p-3 rounded mb-4 border mx-0">
+                            <div class="col-md-6 mb-2 mb-md-0 border-end">
+                                <span class="d-block small text-muted text-uppercase fw-bold">Billed To Patient ID:</span>
+                                <span class="fs-5 fw-bold text-primary">#@Model.PatientId</span>
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <label asp-for="AdmissionId" class="control-label fw-bold text-muted small text-uppercase"></label>
-                                <input asp-for="AdmissionId" class="form-control bg-light text-muted" readonly tabindex="-1" />
+                            <div class="col-md-6">
+                                <span class="d-block small text-muted text-uppercase fw-bold">Admission Context ID:</span>
+                                <span class="fs-5 fw-bold text-dark">@(Model.AdmissionId?.ToString() ?? "N/A")</span>
                             </div>
-                            <div class="col-md-4 mb-2">
-                                <label asp-for="AppointmentId" class="control-label fw-bold text-muted small text-uppercase"></label>
-                                <input asp-for="AppointmentId" class="form-control bg-light text-muted" readonly tabindex="-1" />
+                        </div>
+
+                        <h6 class="text-muted fw-bold text-uppercase border-bottom pb-2 mb-3">Line Item Breakdown</h6>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorFee" class="control-label fw-bold small text-secondary">Consultation / Doctor Fee</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="DoctorFee" class="form-control" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RoomCharges" class="control-label fw-bold small text-secondary">Inpatient Room / Bed Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="RoomCharges" class="form-control" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LabCharges" class="control-label fw-bold small text-secondary">Diagnostic Lab Test Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="LabCharges" class="form-control" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MedicineCharges" class="control-label fw-bold small text-secondary">Pharmacy / Medicine Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="MedicineCharges" class="form-control" type="number" step="0.01" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted fw-bold text-uppercase border-bottom pb-2 mt-3 mb-3">Settlement & Adjustments</h6>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Discount" class="control-label fw-bold text-success small">Apply Courtesy Discount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-success text-white">₹</span>
+                                    <input asp-for="Discount" class="form-control border-success" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PaidAmount" class="control-label fw-bold text-primary small">Initial Payment Received</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white">₹</span>
+                                    <input asp-for="PaidAmount" class="form-control border-primary" type="number" step="0.01" />
+                                </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label asp-for="DoctorFee" class="control-label fw-bold"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="DoctorFee" class="form-control" />
-                                </div>
-                                <span asp-validation-for="DoctorFee" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="RoomCharges" class="control-label fw-bold"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="RoomCharges" class="form-control" />
-                                </div>
-                                <span asp-validation-for="RoomCharges" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="LabCharges" class="control-label fw-bold"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="LabCharges" class="form-control" />
-                                </div>
-                                <span asp-validation-for="LabCharges" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="MedicineCharges" class="control-label fw-bold"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="MedicineCharges" class="form-control" />
-                                </div>
-                                <span asp-validation-for="MedicineCharges" class="text-danger"></span>
-                            </div>
-                        </div>
-
-                        <hr class="my-4" />
-
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="Discount" class="control-label fw-bold text-success"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="Discount" class="form-control" />
-                                </div>
-                                <span asp-validation-for="Discount" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="PaidAmount" class="control-label fw-bold text-primary"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="PaidAmount" class="form-control" />
-                                </div>
-                                <span asp-validation-for="PaidAmount" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="TotalAmount" class="control-label fw-bold text-primary"></label>
-                                <div class="input-group">
-                                    <span class="input-group-text">₹</span>
-                                    <input asp-for="TotalAmount" class="form-control" />
-                                </div>
-                                <span asp-validation-for="TotalAmount" class="text-danger"></span>
-                            </div>
-
-                 
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="PaymentStatus" class="control-label fw-bold"></label>
-                                <select asp-for="PaymentStatus" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.PaymentStatus>()"></select>
-                                <span asp-validation-for="PaymentStatus" class="text-danger"></span>
-                            </div>
-
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="PaymentMode" class="control-label fw-bold"></label>
+                                <label asp-for="PaymentMode" class="control-label fw-bold small">Payment Method</label>
                                 <select asp-for="PaymentMode" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.PaymentMode>()">
-                                    <option value="">-- Select Mode --</option>
+                                    <option value="">-- Select Transfer Mode --</option>
                                 </select>
-                                <span asp-validation-for="PaymentMode" class="text-danger"></span>
                             </div>
-
-                            <div class="col-md-12 mb-3">
-                                <label asp-for="BillDate" class="control-label fw-bold"></label>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="BillDate" class="control-label fw-bold small">Ledger Date</label>
                                 <input asp-for="BillDate" class="form-control bg-light" readonly tabindex="-1" />
-                                <span asp-validation-for="BillDate" class="text-danger"></span>
                             </div>
                         </div>
 
-                        <div class="d-grid mt-4">
-                            <button type="submit" class="btn btn-success btn-lg"><i class="fa-solid fa-check me-2"></i> Confirm & Save Bill</button>
+                        <div class="d-grid mt-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-file-circle-check me-2"></i>Generate Final Invoice</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-2">Cancel Formulation</a>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="mt-3">
-                <a asp-action="Index" class="btn btn-outline-secondary"><i class="fa-solid fa-arrow-left me-1"></i> Cancel & Back to List</a>
             </div>
         </div>
     </div>

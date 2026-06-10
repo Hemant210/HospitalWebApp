@@ -7,45 +7,60 @@
 <div class="container mt-4 mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="d-flex justify-content-end mb-3 d-print-none">
-                <a asp-action="Index" class="btn btn-outline-secondary me-2">Back to List</a>
-                <button onclick="window.print()" class="btn btn-primary"><i class="fa-solid fa-print"></i> Print Invoice</button>
+            <div class="d-flex justify-content-end mb-3 d-print-none gap-2">
+                <a asp-action="Index" class="btn btn-outline-secondary fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Back to Ledger</a>
+                @if (Model.PaymentStatus != HospitalManagement.Models.PaymentStatus.Paid)
+                {
+                    <a asp-action="Edit" asp-route-id="@Model.BillId" class="btn btn-success fw-bold"><i class="fa-solid fa-cash-register me-1"></i> Receive Payment</a>
+                }
+                <button onclick="window.print()" class="btn btn-primary fw-bold"><i class="fa-solid fa-print me-1"></i> Print Invoice</button>
             </div>
 
             <div class="card shadow-sm border-0" id="invoice-card">
                 <div class="card-body p-5">
 
-                    <div class="row mb-4 border-bottom pb-3">
+                    <div class="row mb-4 border-bottom pb-4">
                         <div class="col-sm-6">
-                            <h2 class="text-primary fw-bold">City Care Hospital</h2>
-                            <p class="text-muted mb-0">123 Health Avenue, Medical District</p>
-                            <p class="text-muted">Phone: (555) 123-4567 | Email: billing@citycare.com</p>
+                            <h2 class="text-primary fw-bold mb-1"><i class="fa-solid fa-hospital me-2 text-dark"></i>City Care Hospital</h2>
+                            <p class="text-muted small mb-0">123 Health Avenue, Medical District</p>
+                            <p class="text-muted small">Phone: (555) 123-4567 | Email: billing@citycare.com</p>
                         </div>
                         <div class="col-sm-6 text-sm-end">
-                            <h4 class="text-uppercase fw-bold text-muted">Invoice</h4>
-                            <p class="mb-0"><strong>Bill No:</strong> #@Model.BillId</p>
-                            <p class="mb-0"><strong>Date:</strong> @Model.BillDate.ToString("dd MMM yyyy")</p>
-                            <span class="badge @(Model.PaymentStatus.ToString() == "Paid" ? "bg-success" : "bg-danger") mt-2 fs-6">
-                                @Model.PaymentStatus
-                            </span>
+                            <h4 class="text-uppercase fw-bold text-muted mb-3">Official Invoice</h4>
+                            <p class="mb-0 small"><strong>Invoice No:</strong> INV-#@Model.BillId</p>
+                            <p class="mb-0 small"><strong>Date Issued:</strong> @Model.BillDate.ToString("dd MMM yyyy")</p>
+                            <div class="mt-2">
+                                @if (Model.PaymentStatus == HospitalManagement.Models.PaymentStatus.Paid)
+                                {
+                                    <span class="badge bg-success border border-success px-3 py-2 fs-6">PAID IN FULL</span>
+                                }
+                                else if (Model.PaymentStatus == HospitalManagement.Models.PaymentStatus.Partial)
+                                {
+                                    <span class="badge bg-warning text-dark border border-warning px-3 py-2 fs-6">PARTIAL PAYMENT</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger border border-danger px-3 py-2 fs-6">UNPAID BALANCE</span>
+                                }
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row mb-4">
-                        <div class="col-sm-6">
-                            <h6 class="text-muted text-uppercase fw-bold">Billed To:</h6>
-                            <h5 class="fw-bold">@Model.Patient?.FirstName @Model.Patient?.LastName</h5>
-                            <p class="mb-0"><strong>Phone:</strong> @Model.Patient?.Phone</p>
-                            <p class="mb-0"><strong>Email:</strong> @Model.Patient?.Email</p>
+                    <div class="row mb-4 bg-light p-3 rounded mx-0">
+                        <div class="col-sm-6 border-end">
+                            <h6 class="text-muted text-uppercase fw-bold small">Billed To:</h6>
+                            <h5 class="fw-bold text-dark mb-1">@Model.Patient?.FirstName @Model.Patient?.LastName</h5>
+                            <p class="mb-0 small text-muted"><i class="fa-solid fa-phone me-1"></i> @(Model.Patient?.Phone ?? "N/A")</p>
                         </div>
                         <div class="col-sm-6 text-sm-end">
+                            <h6 class="text-muted text-uppercase fw-bold small">Reference Context:</h6>
                             @if (Model.AdmissionId != null)
                             {
-                                <p class="mb-0"><strong>Admission ID:</strong> @Model.AdmissionId</p>
+                                <p class="mb-0 small text-dark"><strong>Inpatient Admission ID:</strong> #@Model.AdmissionId</p>
                             }
                             @if (Model.AppointmentId != null)
                             {
-                                <p class="mb-0"><strong>Appointment ID:</strong> @Model.AppointmentId</p>
+                                <p class="mb-0 small text-dark"><strong>Outpatient Appt ID:</strong> #@Model.AppointmentId</p>
                             }
                         </div>
                     </div>
@@ -54,34 +69,34 @@
                         <table class="table table-bordered mb-0">
                             <thead class="table-light">
                                 <tr>
-                                    <th class="text-uppercase">Description</th>
-                                    <th class="text-end text-uppercase">Amount</th>
+                                    <th class="text-uppercase text-muted small fw-bold">Description of Services</th>
+                                    <th class="text-end text-uppercase text-muted small fw-bold">Amount Evaluated</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Doctor Consultation Fee</td>
-                                    <td class="text-end">₹@Model.DoctorFee.ToString("0.00")</td>
+                                    <td class="fw-medium text-dark">Professional Consultation Fee</td>
+                                    <td class="text-end text-dark">₹@Model.DoctorFee.ToString("N2")</td>
                                 </tr>
                                 @if (Model.RoomCharges > 0)
                                 {
                                     <tr>
-                                        <td>Inpatient Room/Bed Charges</td>
-                                        <td class="text-end">₹@Model.RoomCharges.ToString("0.00")</td>
+                                        <td class="fw-medium text-dark">Inpatient Room / Ward Lodging Charges</td>
+                                        <td class="text-end text-dark">₹@Model.RoomCharges.ToString("N2")</td>
                                     </tr>
                                 }
                                 @if (Model.LabCharges > 0)
                                 {
                                     <tr>
-                                        <td>Laboratory Tests</td>
-                                        <td class="text-end">₹@Model.LabCharges.ToString("0.00")</td>
+                                        <td class="fw-medium text-dark">Laboratory & Diagnostic Panels</td>
+                                        <td class="text-end text-dark">₹@Model.LabCharges.ToString("N2")</td>
                                     </tr>
                                 }
                                 @if (Model.MedicineCharges > 0)
                                 {
                                     <tr>
-                                        <td>Pharmacy & Medicines</td>
-                                        <td class="text-end">₹@Model.MedicineCharges.ToString("0.00")</td>
+                                        <td class="fw-medium text-dark">Pharmacy Dispensary & Consumables</td>
+                                        <td class="text-end text-dark">₹@Model.MedicineCharges.ToString("N2")</td>
                                     </tr>
                                 }
                             </tbody>
@@ -89,50 +104,53 @@
                     </div>
 
                     <div class="row justify-content-end">
-                        <div class="col-sm-5">
-                            <table class="table table-sm table-borderless">
+                        <div class="col-sm-6 col-md-5">
+                            <table class="table table-sm table-borderless mb-0">
                                 <tr>
-                                    <th>Subtotal:</th>
-                                    <td class="text-end">₹@((Model.DoctorFee + Model.RoomCharges + Model.LabCharges + Model.MedicineCharges).ToString("0.00"))</td>
+                                    <th class="text-muted fw-bold">Subtotal:</th>
+                                    <td class="text-end text-dark fw-bold">₹@((Model.DoctorFee + Model.RoomCharges + Model.LabCharges + Model.MedicineCharges).ToString("N2"))</td>
                                 </tr>
                                 @if (Model.Discount > 0)
                                 {
-                                    <tr class="text-success">
-                                        <th>Discount:</th>
-                                        <td class="text-end">-₹@Model.Discount.ToString("0.00")</td>
+                                    <tr class="text-success border-bottom">
+                                        <th class="fw-bold">Courtesy Discount:</th>
+                                        <td class="text-end fw-bold">-₹@Model.Discount.ToString("N2")</td>
                                     </tr>
                                 }
-                                <tr class="border-top border-bottom fs-5">
-                                    <th>Net Total:</th>
-                                    <td class="text-end fw-bold text-primary">₹@Model.TotalAmount.ToString("0.00")</td>
+                                <tr class="fs-5">
+                                    <th class="text-dark fw-bold pt-3">Net Total:</th>
+                                    <td class="text-end fw-bold text-primary pt-3">₹@Model.TotalAmount.ToString("N2")</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-muted">Paid Amount:</th>
-                                    <td class="text-end text-muted">₹@Model.PaidAmount.ToString("0.00")</td>
+                                    <th class="text-success fw-bold">Amount Paid:</th>
+                                    <td class="text-end text-success fw-bold">₹@Model.PaidAmount.ToString("N2")</td>
                                 </tr>
-                                <tr class="text-danger border-top">
-                                    <th>Amount Due:</th>
-                                    <td class="text-end fw-bold">₹@((Model.TotalAmount - Model.PaidAmount).ToString("0.00"))</td>
+                                <tr class="border-top border-2 border-dark fs-5 bg-light">
+                                    <th class="text-danger fw-bold py-2 ps-2">Balance Due:</th>
+                                    <td class="text-end text-danger fw-bold py-2 pe-2">₹@((Model.TotalAmount - Model.PaidAmount).ToString("N2"))</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
 
-                    <div class="text-center mt-5 d-print-none text-muted">
-                        <small>This is a computer-generated invoice and does not require a physical signature.</small>
+                    <div class="text-center mt-5 pt-4 border-top d-print-none text-muted">
+                        <small><i class="fa-solid fa-shield-halved me-1"></i>This is a computer-generated transactional invoice and does not require a physical signature.</small>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 <style>
     @@media print {
-        body * {
-            visibility: hidden;
+        body {
+            background-color: white !important;
         }
+
+            body * {
+                visibility: hidden;
+            }
 
         #invoice-card, #invoice-card * {
             visibility: visible;
