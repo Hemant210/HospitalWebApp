@@ -1,42 +1,73 @@
 ﻿@model HospitalManagement.Models.Bed
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Bed Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-circle-info me-2"></i>Hardware Specification File
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="bg-light border text-primary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 65px; height: 65px;">
+                            <i class="fa-solid fa-flat-bed fs-2"></i>
+                        </div>
+                        <h3 class="fw-bold text-dark mt-2 mb-0">Bed Unit: @Model.BedNumber</h3>
+                        <span class="text-muted small">System Resource Tracking ID: #@Model.BedId</span>
+                    </div>
 
-<div>
-    <h4>Bed</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BedNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BedNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PricePerDay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PricePerDay)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ward.WardName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.BedId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="row mb-3">
+                        <div class="col-sm-5 text-muted fw-bold text-uppercase small">Assigned Wing Block</div>
+                        <div class="col-sm-7 text-dark fw-semibold">
+                            <i class="fa-solid fa-hospital me-1 text-muted"></i>@(Model.Ward?.WardName ?? "Unassigned Allocation")
+                        </div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-5 text-muted fw-bold text-uppercase small">Daily Accounting Rate</div>
+                        <div class="col-sm-7 text-dark fw-bold">₹@Model.PricePerDay.ToString("N2") <span class="text-muted small fw-normal">/ operational day</span></div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-5 text-muted fw-bold text-uppercase small">Functional Condition</div>
+                        <div class="col-sm-7">
+                            @if (Model.Status == HospitalManagement.Models.BedStatus.Available)
+                            {
+                                <span class="badge bg-success text-white px-2.5 py-1.5"><i class="fa-solid fa-circle-check me-1"></i>Available for Allotment</span>
+                            }
+                            else if (Model.Status == HospitalManagement.Models.BedStatus.Occupied)
+                            {
+                                <span class="badge bg-danger text-white px-2.5 py-1.5"><i class="fa-solid fa-procedures me-1"></i>Patient Checked-In</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark px-2.5 py-1.5"><i class="fa-solid fa-screwdriver-wrench me-1"></i>Sanitization / Maintenance</span>
+                            }
+                        </div>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a asp-action="Edit" asp-route-id="@Model.BedId" class="btn btn-primary fw-bold w-100 py-2">
+                                <i class="fa-solid fa-wrench me-2"></i>Modify Setup
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">Back to Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -1,47 +1,72 @@
 ﻿@model IEnumerable<HospitalManagement.Models.Ward>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Wards Management";
 }
 
-<h1>Index</h1>
+<div class="container-fluid pt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark m-0">
+            <i class="fa-solid fa-hospital text-primary me-2"></i>Wards Directory
+        </h2>
+        <a asp-action="Create" class="btn btn-primary fw-bold shadow-sm">
+            <i class="fa-solid fa-circle-plus me-1"></i> Add New Ward
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.WardName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.WardType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TotalBeds)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.WardName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WardType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalBeds)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WardId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WardId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WardId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.WardName)</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.WardType)</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.TotalBeds)</th>
+                            <th class="pe-4 py-3 text-end text-uppercase fs-7 text-muted">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark">@Html.DisplayFor(modelItem => item.WardName)</td>
+                                <td>
+                                    <span class="badge bg-light text-secondary border border-secondary-subtle px-2 py-1.5">
+                                        <i class="fa-solid fa-tags me-1 text-muted"></i>@Html.DisplayFor(modelItem => item.WardType)
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="fw-semibold text-dark">
+                                        <i class="fa-solid fa-bed me-1 text-primary"></i>@Html.DisplayFor(modelItem => item.TotalBeds) Beds
+                                    </span>
+                                </td>
+                                <td class="pe-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.WardId" class="btn btn-sm btn-outline-secondary" title="Edit Properties">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.WardId" class="btn btn-sm btn-outline-info" title="Detailed View">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.WardId" class="btn btn-sm btn-outline-danger" title="Remove Ward">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center text-muted py-5">
+                    <i class="fa-solid fa-hotel fs-2 mb-3 text-light"></i>
+                    <p class="mb-0">No hospital wards configured in the database yet.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,48 +1,68 @@
 ﻿@model HospitalManagement.Models.Bed
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Bed";
 }
 
-<h1>Create</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-plus-minus me-2"></i>Register New Bed Unit
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Bed</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="WardId" class="control-label"></label>
-                <select asp-for="WardId" class ="form-control" asp-items="ViewBag.WardId"></select>
+                        <div class="form-group mb-3">
+                            <label asp-for="BedNumber" class="control-label fw-bold mb-1">Bed Identifier / Number</label>
+                            <input asp-for="BedNumber" class="form-control" placeholder="e.g. B-101, BED-04" />
+                            <span asp-validation-for="BedNumber" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="WardId" class="control-label fw-bold mb-1">Target Structural Ward Sector</label>
+                            <select asp-for="WardId" class="form-select" asp-items="ViewBag.WardId">
+                                <option value="">-- Choose Assigned Ward Location --</option>
+                            </select>
+                            <span asp-validation-for="WardId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="PricePerDay" class="control-label fw-bold mb-1">Daily Operational Room Rate</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input asp-for="PricePerDay" class="form-control" placeholder="0.00" type="number" step="0.01" min="0" />
+                            </div>
+                            <span asp-validation-for="PricePerDay" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Status" class="control-label fw-bold mb-1">Initial Status Condition</label>
+                            <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.BedStatus>()"></select>
+                            <span asp-validation-for="Status" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2">
+                                <i class="fa-solid fa-floppy-disk me-2"></i>Save Bed Configuration
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel Setup</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="BedNumber" class="control-label"></label>
-                <input asp-for="BedNumber" class="form-control" />
-                <span asp-validation-for="BedNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PricePerDay" class="control-label"></label>
-                <input asp-for="PricePerDay" class="form-control" />
-                <span asp-validation-for="PricePerDay" class="text-danger"></span>
-            </div>
-            <div class="form-group mb-3">
-                <label asp-for="Status" class="control-label fw-bold"></label>
-                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.BedStatus>()">
-                </select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

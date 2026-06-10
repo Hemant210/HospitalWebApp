@@ -1,53 +1,91 @@
 ﻿@model IEnumerable<HospitalManagement.Models.Bed>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bed Management";
 }
 
-<h1>Index</h1>
+<div class="container-fluid pt-4 px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-dark m-0">
+            <i class="fa-solid fa-bed text-primary me-2"></i>Bed Allotment & Tracking
+        </h2>
+        <a asp-action="Create" class="btn btn-primary fw-bold shadow-sm">
+            <i class="fa-solid fa-plus me-1"></i> Add New Bed
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.BedNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePerDay)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ward)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BedNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerDay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ward.WardName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BedId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BedId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BedId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.BedNumber)</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Bound Ward Wing</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.PricePerDay)</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">@Html.DisplayNameFor(model => model.Status)</th>
+                            <th class="pe-4 py-3 text-end text-uppercase fs-7 text-muted">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark fs-5">
+                                    <i class="fa-solid fa-flat-bed text-muted me-2 small"></i>@Html.DisplayFor(modelItem => item.BedNumber)
+                                </td>
+                                <td class="text-secondary fw-medium">
+                                    <i class="fa-solid fa-hospital me-1 text-muted small"></i>@(item.Ward?.WardName ?? "Unassigned")
+                                </td>
+                                <td class="fw-semibold text-dark">
+                                    ₹@item.PricePerDay.ToString("N2") <span class="text-muted small fw-normal">/ day</span>
+                                </td>
+                                <td>
+                                    @if (item.Status == HospitalManagement.Models.BedStatus.Available)
+                                    {
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2.5 py-1.5 rounded-pill fw-bold">
+                                            <i class="fa-solid fa-circle-check me-1"></i>Available
+                                        </span>
+                                    }
+                                    else if (item.Status == HospitalManagement.Models.BedStatus.Occupied)
+                                    {
+                                        <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2.5 py-1.5 rounded-pill fw-bold">
+                                            <i class="fa-solid fa-procedures me-1"></i>Occupied
+                                        </span>
+                                    }
+                                    else // Maintenance
+                                    {
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2.5 py-1.5 rounded-pill fw-bold">
+                                            <i class="fa-solid fa-screwdriver-wrench me-1"></i>Maintenance
+                                        </span>
+                                    }
+                                </td>
+                                <td class="pe-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.BedId" class="btn btn-sm btn-outline-secondary" title="Modify Configuration">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.BedId" class="btn btn-sm btn-outline-info" title="Specifications">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a asp-action="Delete" asp-route-id="@item.BedId" class="btn btn-sm btn-outline-danger" title="Remove Bed Unit">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center text-muted py-5">
+                    <i class="fa-solid fa-bed-pulse fs-2 mb-3 text-light"></i>
+                    <p class="mb-0">No hardware bed units tracked inside the engine database yet.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,43 +1,59 @@
 ﻿@model HospitalManagement.Models.Ward
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Create Ward";
 }
 
-<h1>Create</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-square-plus me-2"></i>Configure New Ward Wing
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Ward</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="WardName" class="control-label"></label>
-                <input asp-for="WardName" class="form-control" />
-                <span asp-validation-for="WardName" class="text-danger"></span>
+                        <div class="form-group mb-3">
+                            <label asp-for="WardName" class="control-label fw-bold mb-1">Ward Designation / Name</label>
+                            <input asp-for="WardName" class="form-control" placeholder="e.g. ICU Wing A, Pediatrics General" />
+                            <span asp-validation-for="WardName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="WardType" class="control-label fw-bold mb-1">Classification Category</label>
+                            <input asp-for="WardType" class="form-control" placeholder="e.g. Intensive Care, General, Isolation" />
+                            <span asp-validation-for="WardType" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="TotalBeds" class="control-label fw-bold mb-1">Total Bed Allotment Capacity</label>
+                            <input asp-for="TotalBeds" class="form-control" type="number" min="1" placeholder="Enter total available bed capacity" />
+                            <span asp-validation-for="TotalBeds" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2">
+                                <i class="fa-solid fa-floppy-disk me-2"></i>Save Ward Details
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">
+                                <i class="fa-solid fa-arrow-left me-1"></i>Cancel & Return
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="WardType" class="control-label"></label>
-                <input asp-for="WardType" class="form-control" />
-                <span asp-validation-for="WardType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalBeds" class="control-label"></label>
-                <input asp-for="TotalBeds" class="form-control" />
-                <span asp-validation-for="TotalBeds" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

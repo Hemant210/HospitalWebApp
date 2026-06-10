@@ -1,45 +1,43 @@
 ﻿@model HospitalManagement.Models.Bed
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Decommission Bed";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-triangle-exclamation me-2"></i>Confirm Resource Deletion
+                    </h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-warning border text-start small mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                        <strong>Database Constraint Warning:</strong> Deleting this structural bed tracking layer from the hardware catalog will clear history entries across closed systemic clinical archives.
+                    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Bed</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BedNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BedNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PricePerDay)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PricePerDay)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ward)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ward.WardName)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="BedId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Hardware Profile</p>
+                    <h3 class="fw-bold text-dark mb-4">Bed Reference: @Model.BedNumber</h3>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start mb-4">
+                        <div class="small mb-1"><strong>Located Sector:</strong> @Model.Ward?.WardName</div>
+                        <div class="small"><strong>Base Accounting Rate Metrics:</strong> ₹@Model.PricePerDay.ToString("N2") / day</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="BedId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm">
+                                <i class="fa-solid fa-trash-can me-2"></i>Confirm Wipe Action
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Retain Asset Matrix</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

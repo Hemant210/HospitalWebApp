@@ -1,0 +1,39 @@
+﻿@model HospitalManagement.Models.Staff
+
+@{
+    ViewData["Title"] = "Decommission Personnel";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user-minus me-2"></i>Confirm Account Removal</h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-warning border text-start small mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                        <strong>Critical Warning:</strong> Purging this employee file stops them from picking up running transactional operations across lab testing lines.
+                    </div>
+
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Personnel Profile</p>
+                    <h3 class="fw-bold text-dark mb-4">@Model.FirstName @Model.LastName</h3>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start mb-4">
+                        <div class="small mb-1"><strong>Operational Designation Title:</strong> @Model.Role</div>
+                        <div class="small"><strong>Structural Branch Block:</strong> @Model.Department?.DeptName</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="StaffId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm"><i class="fa-solid fa-user-xmark me-2"></i>Drop Record From Server</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Retain Employee Profile</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

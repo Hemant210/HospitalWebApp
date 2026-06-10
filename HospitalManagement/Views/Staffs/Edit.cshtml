@@ -1,58 +1,57 @@
 ﻿@model HospitalManagement.Models.Staff
 
 @{
-    ViewData["Title"] = "Add Staff";
+    ViewData["Title"] = "Modify Staff File";
 }
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-7 col-lg-6">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white py-3">
-                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user-plus me-2"></i>Onboard New Staff Member</h5>
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user-gear me-2"></i>Modify Staff Properties</h5>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="Create">
+                    <form asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="StaffId" />
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="FirstName" class="control-label fw-bold mb-1"></label>
-                                <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                                <input asp-for="FirstName" class="form-control" />
                                 <span asp-validation-for="FirstName" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label asp-for="LastName" class="control-label fw-bold mb-1"></label>
-                                <input asp-for="LastName" class="form-control" placeholder="Last Name" />
+                                <input asp-for="LastName" class="form-control" />
                                 <span asp-validation-for="LastName" class="text-danger small"></span>
                             </div>
                         </div>
 
                         <div class="form-group mb-3">
                             <label asp-for="Role" class="control-label fw-bold mb-1">Functional Assignment Title</label>
-                            <input asp-for="Role" class="form-control" placeholder="e.g. Senior Nurse, Lab Tech" />
+                            <input asp-for="Role" class="form-control" />
                             <span asp-validation-for="Role" class="text-danger small"></span>
                         </div>
 
                         <div class="form-group mb-3">
                             <label asp-for="DepartmentId" class="control-label fw-bold mb-1">Hospital Department Branch</label>
-                            <select asp-for="DepartmentId" class="form-select" asp-items="ViewBag.DepartmentId">
-                                <option value="">-- Assign a Department Branch --</option>
-                            </select>
+                            <select asp-for="DepartmentId" class="form-select" asp-items="ViewBag.DepartmentId"></select>
                             <span asp-validation-for="DepartmentId" class="text-danger small"></span>
                         </div>
 
                         <div class="form-group mb-4">
                             <label asp-for="Phone" class="control-label fw-bold mb-1">Primary Phone Number</label>
-                            <input asp-for="Phone" class="form-control" type="tel" placeholder="Enter contact line" />
+                            <input asp-for="Phone" class="form-control" type="tel" />
                             <span asp-validation-for="Phone" class="text-danger small"></span>
                         </div>
 
                         <hr class="my-4 text-muted" />
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-floppy-disk me-2"></i>Save Staff File</button>
-                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel Configuration</a>
+                            <button type="submit" class="btn btn-warning fw-bold py-2"><i class="fa-solid fa-square-check me-2"></i>Commit File Changes</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Abandon Variations</a>
                         </div>
                     </form>
                 </div>

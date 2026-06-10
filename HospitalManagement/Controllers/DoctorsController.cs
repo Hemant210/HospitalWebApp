@@ -5,10 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HospitalManagement.Controllers
 {
@@ -22,28 +18,35 @@ namespace HospitalManagement.Controllers
             _context = context;
         }
 
-        // GET: Doctors
-        public async Task<IActionResult> Index()
+        // GET: Doctors (with advanced search filtering)
+        public async Task<IActionResult> Index(string searchString)
         {
-            var hospitalDbContext = _context.Doctors.Include(d => d.Department);
-            return View(await hospitalDbContext.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+
+            // Include Department data to avoid lazy-loading issues in the view
+            var doctorsQuery = _context.Doctors.Include(d => d.Department).AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.Trim();
+                doctorsQuery = doctorsQuery.Where(d => d.FirstName.Contains(searchString)
+                                                    || d.LastName.Contains(searchString)
+                                                    || d.Specialization.Contains(searchString));
+            }
+
+            return View(await doctorsQuery.AsNoTracking().ToListAsync());
         }
 
         // GET: Doctors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var doctor = await _context.Doctors
                 .Include(d => d.Department)
                 .FirstOrDefaultAsync(m => m.DoctorId == id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
+
+            if (doctor == null) return NotFound();
 
             return View(doctor);
         }
@@ -57,8 +60,6 @@ namespace HospitalManagement.Controllers
         }
 
         // POST: Doctors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = HospitalRoles.Admin)]
@@ -75,33 +76,25 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: Doctors/Edit/5
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var doctor = await _context.Doctors.FindAsync(id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
+            if (doctor == null) return NotFound();
+
             ViewData["DepartmentId"] = new SelectList(_context.Departments, "DepartmentId", "DeptName", doctor.DepartmentId);
             return View(doctor);
         }
 
         // POST: Doctors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> Edit(int id, [Bind("DoctorId,FirstName,LastName,Specialization,Phone,Email,DepartmentId")] Doctor doctor)
         {
-            if (id != doctor.DoctorId)
-            {
-                return NotFound();
-            }
+            if (id != doctor.DoctorId) return NotFound();
 
             if (ModelState.IsValid)
             {
@@ -112,14 +105,8 @@ namespace HospitalManagement.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DoctorExists(doctor.DoctorId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    if (!DoctorExists(doctor.DoctorId)) return NotFound();
+                    else throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -128,20 +115,16 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: Doctors/Delete/5
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var doctor = await _context.Doctors
                 .Include(d => d.Department)
                 .FirstOrDefaultAsync(m => m.DoctorId == id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
+
+            if (doctor == null) return NotFound();
 
             return View(doctor);
         }
@@ -149,15 +132,15 @@ namespace HospitalManagement.Controllers
         // POST: Doctors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var doctor = await _context.Doctors.FindAsync(id);
             if (doctor != null)
             {
                 _context.Doctors.Remove(doctor);
+                await _context.SaveChangesAsync();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

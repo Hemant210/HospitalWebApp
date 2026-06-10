@@ -1,39 +1,43 @@
 ﻿@model HospitalManagement.Models.Ward
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Decommission Ward Wing";
 }
 
-<h1>Delete</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-circle-exclamation fa-triangle-exclamation me-2"></i>Confirm Structural Deletion
+                    </h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-warning border text-start small mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                        <strong>Critical Cascade Warning:</strong> Purging this ward mapping layer will automatically isolate or clear child `Bed` relational keys mapped inside this structural sector.
+                    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Ward</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WardName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WardName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WardType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WardType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalBeds)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalBeds)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="WardId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Removal Ward Wing</p>
+                    <h3 class="fw-bold text-dark mb-4">@Model.WardName</h3>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start mb-4">
+                        <div class="small mb-1"><strong>Operational Classification:</strong> @Model.WardType</div>
+                        <div class="small"><strong>Total Bound Hardware Entities:</strong> @Model.TotalBeds Beds</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="WardId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm">
+                                <i class="fa-solid fa-dumpster-fire me-2"></i>Confirm Wipe Action
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Retain Configuration Structure</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

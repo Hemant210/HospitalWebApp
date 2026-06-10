@@ -1,44 +1,58 @@
 ﻿@model HospitalManagement.Models.Ward
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Modify Ward Configuration";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-sliders me-2"></i>Modify Ward Parameters
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="WardId" />
 
-<h4>Ward</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="WardId" />
-            <div class="form-group">
-                <label asp-for="WardName" class="control-label"></label>
-                <input asp-for="WardName" class="form-control" />
-                <span asp-validation-for="WardName" class="text-danger"></span>
+                        <div class="form-group mb-3">
+                            <label asp-for="WardName" class="control-label fw-bold mb-1">Ward Designation / Name</label>
+                            <input asp-for="WardName" class="form-control" />
+                            <span asp-validation-for="WardName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="WardType" class="control-label fw-bold mb-1">Classification Category</label>
+                            <input asp-for="WardType" class="form-control" />
+                            <span asp-validation-for="WardType" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="TotalBeds" class="control-label fw-bold mb-1">Total Bed Allotment Capacity</label>
+                            <input asp-for="TotalBeds" class="form-control" type="number" min="1" />
+                            <span asp-validation-for="TotalBeds" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning fw-bold py-2">
+                                <i class="fa-solid fa-circle-check me-2"></i>Commit Changes
+                            </button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Discard Modifications</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="WardType" class="control-label"></label>
-                <input asp-for="WardType" class="form-control" />
-                <span asp-validation-for="WardType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TotalBeds" class="control-label"></label>
-                <input asp-for="TotalBeds" class="form-control" />
-                <span asp-validation-for="TotalBeds" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

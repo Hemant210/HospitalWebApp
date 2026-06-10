@@ -1,36 +1,56 @@
 ﻿@model HospitalManagement.Models.Ward
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Ward Specification Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-circle-info me-2"></i>Infrastructure Parameter File
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Ward Wing Identifier</div>
+                        <div class="col-sm-8 text-dark fw-bold fs-5">@Model.WardName</div>
+                    </div>
+                    <hr class="text-muted" />
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Functional Classification</div>
+                        <div class="col-sm-8">
+                            <span class="badge bg-light text-dark border fs-6 fw-normal">
+                                <i class="fa-solid fa-tags text-info me-1"></i>@Model.WardType
+                            </span>
+                        </div>
+                    </div>
+                    <hr class="text-muted" />
+                    <div class="row mb-4">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Allotted Structural Capacity</div>
+                        <div class="col-sm-8 text-dark fw-semibold">
+                            <i class="fa-solid fa-bed text-primary me-1"></i>@Model.TotalBeds Total System Beds
+                        </div>
+                    </div>
 
-<div>
-    <h4>Ward</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WardName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WardName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.WardType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.WardType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TotalBeds)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TotalBeds)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.WardId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a asp-action="Edit" asp-route-id="@Model.WardId" class="btn btn-primary fw-bold w-100 py-2">
+                                <i class="fa-solid fa-wrench me-2"></i>Modify Setup
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">
+                                <i class="fa-solid fa-arrow-left me-1"></i>Back to List
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
