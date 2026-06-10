@@ -1,42 +1,74 @@
 ﻿@model HospitalManagement.Models.Prescription
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Official Prescription";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0 border-top border-primary border-4">
+                <div class="card-body p-5">
+                    <div class="d-flex justify-content-between border-bottom pb-4 mb-4">
+                        <div>
+                            <h2 class="fw-bold text-primary mb-0"><i class="fa-solid fa-prescription me-2 text-dark"></i>City Care Hospital</h2>
+                            <p class="text-muted small mb-0">Official Medical Prescription</p>
+                        </div>
+                        <div class="text-end">
+                            <h5 class="fw-bold text-dark mb-0">RX-#@Model.PrescriptionId</h5>
+                            <span class="text-muted small">Date: @Model.PrescribedDate.ToString("dd MMM yyyy")</span>
+                        </div>
+                    </div>
 
-<div>
-    <h4>Prescription</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RecordId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RecordId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrescribedDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrescribedDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Notes)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Notes)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Doctor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Doctor.FirstName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.PrescriptionId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="row bg-light p-3 rounded mb-4">
+                        <div class="col-6">
+                            <span class="d-block text-muted small fw-bold text-uppercase">Patient Target</span>
+                            <span class="fs-5 fw-bold text-dark">@Model.MedicalRecord?.Patient?.FirstName @Model.MedicalRecord?.Patient?.LastName</span>
+                        </div>
+                        <div class="col-6 text-end border-start">
+                            <span class="d-block text-muted small fw-bold text-uppercase">Prescribing Physician</span>
+                            <span class="fs-5 fw-bold text-dark">Dr. @Model.Doctor?.FirstName @Model.Doctor?.LastName</span>
+                            <span class="d-block text-muted small">ID: @Model.DoctorId</span>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold text-secondary border-bottom pb-2 mb-3">Medications to Dispense</h5>
+                    @if (Model.PrescriptionItems != null && Model.PrescriptionItems.Any())
+                    {
+                        <ul class="list-group list-group-flush mb-4 border rounded">
+                            @foreach (var item in Model.PrescriptionItems)
+                            {
+                                <li class="list-group-item p-3 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="fw-bold text-dark mb-1"><i class="fa-solid fa-pills text-primary me-2"></i>@item.Medicine?.Name</h6>
+                                        <span class="small text-muted">Dosage Strategy: <strong>@item.Dosage</strong></span>
+                                    </div>
+                                    <span class="badge bg-secondary rounded-pill px-3 py-2">@item.DurationDays Days</span>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="alert alert-warning small"><i class="fa-solid fa-triangle-exclamation me-1"></i>Warning: No medication items have been attached to this RX slip yet.</div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(Model.Notes))
+                    {
+                        <div class="mt-4 pt-3 border-top">
+                            <h6 class="text-muted fw-bold small text-uppercase">Clinical / Pharmacy Notes:</h6>
+                            <p class="text-dark fst-italic">"@Model.Notes"</p>
+                        </div>
+                    }
+
+                    <hr class="mt-5 mb-4 text-muted" />
+
+                    <div class="text-center d-print-none">
+                        <button class="btn btn-outline-dark me-2 px-4" onclick="window.print()"><i class="fa-solid fa-print me-1"></i> Print RX</button>
+                        <a asp-controller="MedicalRecords" asp-action="Details" asp-route-id="@Model.RecordId" class="btn btn-primary px-4"><i class="fa-solid fa-arrow-left me-1"></i> Back to Patient Record</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

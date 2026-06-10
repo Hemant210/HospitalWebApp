@@ -1,55 +1,73 @@
 ﻿@model HospitalManagement.Models.Admission
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Admit Patient";
 }
 
-<h1>Create</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-hospital-user me-2"></i>Inpatient Admission Check-In</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Admission</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="PatientId" class="control-label"></label>
-                <select asp-for="PatientId" class ="form-control" asp-items="ViewBag.PatientId"></select>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PatientId" class="control-label fw-bold mb-1">Target Patient Profile</label>
+                                <select asp-for="PatientId" class="form-select" asp-items="ViewBag.PatientId">
+                                    <option value="">-- Choose Patient Profile File --</option>
+                                </select>
+                                <span asp-validation-for="PatientId" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorId" class="control-label fw-bold mb-1">Primary Admitting Physician</label>
+                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId">
+                                    <option value="">-- Choose Assigned Doctor --</option>
+                                </select>
+                                <span asp-validation-for="DoctorId" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="BedId" class="control-label fw-bold mb-1">Available Hardware Bed Resource</label>
+                                <select asp-for="BedId" class="form-select border-primary shadow-sm" asp-items="ViewBag.BedId">
+                                    <option value="">-- Select Vacant Ward Unit --</option>
+                                </select>
+                                <span asp-validation-for="BedId" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="AdmitDate" class="control-label fw-bold mb-1">Admission Timestamp</label>
+                                <input asp-for="AdmitDate" class="form-control" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                                <span asp-validation-for="AdmitDate" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Reason" class="control-label fw-bold mb-1">Clinical Indications For Admission</label>
+                            <textarea asp-for="Reason" class="form-control" rows="3" placeholder="Enter continuous physical symptoms diagnostic justifications necessitating 24-hr monitoring..."></textarea>
+                            <span asp-validation-for="Reason" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-circle-check me-2"></i>Complete Check-In Admission</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel Order</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DoctorId" class="control-label"></label>
-                <select asp-for="DoctorId" class ="form-control" asp-items="ViewBag.DoctorId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="BedId" class="control-label"></label>
-                <select asp-for="BedId" class ="form-control" asp-items="ViewBag.BedId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="AdmitDate" class="control-label"></label>
-                <input asp-for="AdmitDate" class="form-control" />
-                <span asp-validation-for="AdmitDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DischargeDate" class="control-label"></label>
-                <input asp-for="DischargeDate" class="form-control" />
-                <span asp-validation-for="DischargeDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Reason" class="control-label"></label>
-                <input asp-for="Reason" class="form-control" />
-                <span asp-validation-for="Reason" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

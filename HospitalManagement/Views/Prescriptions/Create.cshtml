@@ -1,106 +1,60 @@
-﻿@* @model HospitalManagement.Models.Prescription
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Prescription</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="RecordId" class="control-label"></label>
-                <input asp-for="RecordId" class="form-control" />
-                <span asp-validation-for="RecordId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DoctorId" class="control-label"></label>
-                <select asp-for="DoctorId" class ="form-control" asp-items="ViewBag.DoctorId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrescribedDate" class="control-label"></label>
-                <input asp-for="PrescribedDate" class="form-control" />
-                <span asp-validation-for="PrescribedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Notes" class="control-label"></label>
-                <input asp-for="Notes" class="form-control" />
-                <span asp-validation-for="Notes" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-} *@
-
-
-
-
-
-@model HospitalManagement.Models.Prescription
+﻿@model HospitalManagement.Models.Prescription
 
 @{
     ViewData["Title"] = "Write Prescription";
 }
 
-<div class="container mt-4 mb-5">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 col-lg-7">
             <div class="card shadow-sm border-0">
                 <div class="card-header bg-primary text-white py-3">
-                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-prescription me-2"></i>Write New Prescription</h5>
+                    <h5 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-file-prescription me-2"></i>Write New Prescription
+                    </h5>
                 </div>
                 <div class="card-body p-4">
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="RecordId" class="control-label fw-bold mb-1">Medical Record ID</label>
-                                <select asp-for="RecordId" class="form-select bg-light" asp-items="ViewBag.RecordId"></select>
-                                <span asp-validation-for="RecordId" class="text-danger"></span>
+                        <div class="row bg-light p-3 rounded mb-4 border">
+                            <div class="col-md-6 mb-2 mb-md-0">
+                                <label asp-for="RecordId" class="control-label fw-bold mb-1 text-muted small text-uppercase">Patient Medical Record</label>
+                                <select asp-for="RecordId" class="form-select bg-white shadow-sm border-primary" asp-items="ViewBag.RecordId"></select>
+                                <span asp-validation-for="RecordId" class="text-danger small"></span>
                             </div>
 
-                            <div class="col-md-6 mb-3">
-                                <label asp-for="DoctorId" class="control-label fw-bold mb-1">Prescribing Doctor</label>
-                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId"></select>
-                                <span asp-validation-for="DoctorId" class="text-danger"></span>
+                            <div class="col-md-6">
+                                <label asp-for="DoctorId" class="control-label fw-bold mb-1 text-muted small text-uppercase">Prescribing Doctor</label>
+                                <select asp-for="DoctorId" class="form-select bg-white shadow-sm" asp-items="ViewBag.DoctorId"></select>
+                                <span asp-validation-for="DoctorId" class="text-danger small"></span>
                             </div>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label asp-for="PrescribedDate" class="control-label fw-bold mb-1">Date</label>
+                            <label asp-for="PrescribedDate" class="control-label fw-bold mb-1">Authorization Date</label>
                             <input asp-for="PrescribedDate" class="form-control" type="date" />
-                            <span asp-validation-for="PrescribedDate" class="text-danger"></span>
+                            <span asp-validation-for="PrescribedDate" class="text-danger small"></span>
                         </div>
 
                         <div class="form-group mb-4">
-                            <label asp-for="Notes" class="control-label fw-bold mb-1">Pharmacy / Clinical Notes (Optional)</label>
-                            <textarea asp-for="Notes" class="form-control" rows="3" placeholder="e.g., Take after meals..."></textarea>
-                            <span asp-validation-for="Notes" class="text-danger"></span>
+                            <label asp-for="Notes" class="control-label fw-bold mb-1">Clinical / Pharmacy Instructions (Optional)</label>
+                            <textarea asp-for="Notes" class="form-control" rows="4" placeholder="e.g., Take medication after meals. Avoid dairy products..."></textarea>
+                            <span asp-validation-for="Notes" class="text-danger small"></span>
                         </div>
 
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success fw-bold"><i class="fa-solid fa-check me-2"></i> Save Prescription</button>
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2">
+                                <i class="fa-solid fa-floppy-disk me-2"></i>Save & Proceed to Add Medicines
+                            </button>
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm mt-1">
+                                <i class="fa-solid fa-arrow-left me-1"></i>Cancel & Return
+                            </a>
                         </div>
                     </form>
                 </div>
-            </div>
-            <div class="mt-3">
-                <a href="javascript:history.back()" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-arrow-left me-1"></i> Go Back</a>
             </div>
         </div>
     </div>

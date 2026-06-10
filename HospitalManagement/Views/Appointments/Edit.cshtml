@@ -1,33 +1,30 @@
 ﻿@model HospitalManagement.Models.Appointment
 
 @{
-    ViewData["Title"] = "Book Appointment";
+    ViewData["Title"] = "Reschedule Appointment";
 }
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white py-3">
-                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-calendar-plus me-2"></i>Schedule Patient Appointment</h5>
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-calendar-days me-2"></i>Modify Scheduled Appointment Parameters</h5>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="Create">
+                    <form asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="AppointmentId" />
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="PatientId" class="control-label fw-bold mb-1">Target Patient Profile</label>
-                                <select asp-for="PatientId" class="form-select border-primary shadow-sm" asp-items="ViewBag.PatientId">
-                                    <option value="">-- Choose Patient Identity --</option>
-                                </select>
+                                <select asp-for="PatientId" class="form-select" asp-items="ViewBag.PatientId"></select>
                                 <span asp-validation-for="PatientId" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label asp-for="DoctorId" class="control-label fw-bold mb-1">Consulting Physician</label>
-                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId">
-                                    <option value="">-- Select On-Duty Doctor --</option>
-                                </select>
+                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId"></select>
                                 <span asp-validation-for="DoctorId" class="text-danger small"></span>
                             </div>
                         </div>
@@ -35,12 +32,12 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="AppointmentDate" class="control-label fw-bold mb-1">Allocation Slot Timeline</label>
-                                <input asp-for="AppointmentDate" class="form-control" type="datetime-local" />
+                                <input asp-for="AppointmentDate" class="form-control border-warning" type="datetime-local" />
                                 <span asp-validation-for="AppointmentDate" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label asp-for="Status" class="control-label fw-bold mb-1">Initial Pipeline Status</label>
-                                <select asp-for="Status" class="form-select">
+                                <label asp-for="Status" class="control-label fw-bold mb-1">Pipeline Status</label>
+                                <select asp-for="Status" class="form-select border-warning">
                                     <option value="Scheduled">Scheduled</option>
                                     <option value="Completed">Completed</option>
                                     <option value="Cancelled">Cancelled</option>
@@ -50,16 +47,16 @@
                         </div>
 
                         <div class="form-group mb-4">
-                            <label asp-for="Reason" class="control-label fw-bold mb-1">Chief Complaint / Purpose of Visit</label>
-                            <textarea asp-for="Reason" class="form-control" rows="3" placeholder="Describe clinical indications (e.g. Routine follow-up, acute chest discomfort, hypertension evaluation)..."></textarea>
+                            <label asp-for="Reason" class="control-label fw-bold mb-1">Chief Complaint Narrative Update</label>
+                            <textarea asp-for="Reason" class="form-control" rows="3"></textarea>
                             <span asp-validation-for="Reason" class="text-danger small"></span>
                         </div>
 
                         <hr class="my-4 text-muted" />
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-circle-check me-2"></i>Book Queue Slot</button>
-                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Abandon Reservation</a>
+                            <button type="submit" class="btn btn-warning fw-bold py-2"><i class="fa-solid fa-square-check me-2"></i>Commit Schedule Updates</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Discard Modifications</a>
                         </div>
                     </form>
                 </div>

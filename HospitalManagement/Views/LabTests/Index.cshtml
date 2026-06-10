@@ -1,77 +1,102 @@
 ﻿@model IEnumerable<HospitalManagement.Models.LabTest>
+@using HospitalManagement.Auth
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Laboratory Testing Dashboard";
 }
 
-<h1>Index</h1>
+<div class="container-fluid pt-4 px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <h2 class="fw-bold text-dark m-0">
+            <i class="fa-solid fa-microscope text-primary me-2"></i>Laboratory Dashboard
+        </h2>
+        <a asp-action="Create" class="btn btn-primary fw-bold shadow-sm">
+            <i class="fa-solid fa-vial-circle-check me-1"></i> Order New Test
+        </a>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TestName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cost)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Result)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TestDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MedicalRecord)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Patient)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Technician)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Result)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TestDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MedicalRecord.RecordId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patient.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Technician.FirstName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.TestId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.TestId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.TestId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 bg-light rounded">
+            <form asp-action="Index" method="get" class="row g-2 align-items-center">
+                <div class="col-10 col-md-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control border-start-0" placeholder="Search by test name or patient..." />
+                    </div>
+                </div>
+                <div class="col-2 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-secondary fw-bold px-3">Filter</button>
+                    @if (ViewData["CurrentFilter"] != null)
+                    {
+                        <a asp-action="Index" class="btn btn-sm btn-outline-secondary border bg-white"><i class="fa-solid fa-xmark"></i></a>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase fs-7 text-muted">Date Ordered</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Test Name</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Patient</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Status</th>
+                            <th class="pe-4 py-3 text-end text-uppercase fs-7 text-muted">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-medium text-secondary">@item.TestDate.ToString("dd MMM yy HH:mm")</td>
+                                <td class="fw-bold text-dark">@item.TestName</td>
+                                <td class="text-primary fw-semibold">@item.Patient?.FirstName @item.Patient?.LastName</td>
+                                <td>
+                                    @if (item.Status == HospitalManagement.Models.LabTestStatus.Completed)
+                                    {
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"><i class="fa-solid fa-check-double me-1"></i>Completed</span>
+                                    }
+                                    else if (item.Status == HospitalManagement.Models.LabTestStatus.Pending)
+                                    {
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2 py-1"><i class="fa-solid fa-clock me-1"></i>Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle px-2 py-1"><i class="fa-solid fa-spinner fa-spin me-1"></i>@item.Status</span>
+                                    }
+                                </td>
+                                <td class="pe-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Edit" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-primary" title="Update Results">
+                                            <i class="fa-solid fa-file-pen"></i> Results
+                                        </a>
+                                        <a asp-action="Details" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-info" title="View Details">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        @if (User.IsInRole(HospitalRoles.Admin))
+                                        {
+                                            <a asp-action="Delete" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            @if (!Model.Any())
+            {
+                <div class="text-center text-muted py-5">
+                    <i class="fa-solid fa-flask fs-2 mb-3 text-light"></i>
+                    <p class="mb-0">No laboratory test orders found in the database.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,73 +1,111 @@
 ﻿@model HospitalManagement.Models.Patient
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Register Patient";
 }
 
-<h1>Create</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-address-card me-2"></i>Patient Registration Form</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-<h4>Patient</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                        <h6 class="text-primary fw-bold text-uppercase border-bottom pb-2 mb-3">Personal Information</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FirstName" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="FirstName" class="form-control" placeholder="Legal First Name" />
+                                <span asp-validation-for="FirstName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LastName" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="LastName" class="form-control" placeholder="Legal Last Name" />
+                                <span asp-validation-for="LastName" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DOB" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="DOB" class="form-control" type="date" />
+                                <span asp-validation-for="DOB" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Gender" class="control-label fw-bold mb-1"></label>
+                                <select asp-for="Gender" class="form-select">
+                                    <option value="">-- Select --</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <h6 class="text-primary fw-bold text-uppercase border-bottom pb-2 mt-3 mb-3">Contact Details</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Phone" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="Phone" class="form-control" type="tel" placeholder="Mobile / Home" />
+                                <span asp-validation-for="Phone" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Email" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="Email" class="form-control" type="email" placeholder="patient@example.com" />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="Address" class="control-label fw-bold mb-1"></label>
+                            <input asp-for="Address" class="form-control" placeholder="Full residential street address" />
+                            <span asp-validation-for="Address" class="text-danger small"></span>
+                        </div>
+
+                        <h6 class="text-primary fw-bold text-uppercase border-bottom pb-2 mt-3 mb-3">Medical & Insurance</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="BloodGroup" class="control-label fw-bold mb-1"></label>
+                                <select asp-for="BloodGroup" class="form-select">
+                                    <option value="">-- Unknown --</option>
+                                    <option value="A+">A+</option>
+                                    <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
+                                </select>
+                                <span asp-validation-for="BloodGroup" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="InsuranceNo" class="control-label fw-bold mb-1"></label>
+                                <input asp-for="InsuranceNo" class="form-control" placeholder="Policy ID Number" />
+                                <span asp-validation-for="InsuranceNo" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-floppy-disk me-2"></i>Save Patient Profile</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel Configuration</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DOB" class="control-label"></label>
-                <input asp-for="DOB" class="form-control" />
-                <span asp-validation-for="DOB" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <input asp-for="Gender" class="form-control" />
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BloodGroup" class="control-label"></label>
-                <input asp-for="BloodGroup" class="form-control" />
-                <span asp-validation-for="BloodGroup" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InsuranceNo" class="control-label"></label>
-                <input asp-for="InsuranceNo" class="form-control" />
-                <span asp-validation-for="InsuranceNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

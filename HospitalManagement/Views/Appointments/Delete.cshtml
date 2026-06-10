@@ -1,0 +1,40 @@
+﻿@model HospitalManagement.Models.Appointment
+
+@{
+    ViewData["Title"] = "Cancel Appointment Slot";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-calendar-xmark me-2"></i>Cancel & Void Booking Ticket</h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-warning border text-start small mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                        <strong>Cancellation Protocol Warning:</strong> Removing this slot frees up the attending physician's clinical schedule allocations on the calendar engine dashboard directory.
+                    </div>
+
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Cancellation Queue</p>
+                    <h3 class="fw-bold text-dark mb-1">Patient: @Model.Patient?.FirstName @Model.Patient?.LastName</h3>
+                    <span class="text-muted small">Appointment Sequence reference: #@Model.AppointmentId</span>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start my-4 gap-1">
+                        <div class="small"><strong>Assigned Clinician:</strong> Dr. @Model.Doctor?.LastName</div>
+                        <div class="small"><strong>Chronological Allocation:</strong> @Model.AppointmentDate.ToString("dd MMMM yyyy, hh:mm tt")</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="AppointmentId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm"><i class="fa-solid fa-calendar-minus me-2"></i>Confirm Ticket Removal</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Retain Booking State</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

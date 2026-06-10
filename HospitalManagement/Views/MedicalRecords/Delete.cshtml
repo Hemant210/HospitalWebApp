@@ -1,0 +1,41 @@
+﻿@model HospitalManagement.Models.MedicalRecord
+
+@{
+    ViewData["Title"] = "Delete Case File";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-triangle-exclamation me-2"></i>Confirm Irreversible Deletion</h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-danger text-start small mb-4">
+                        <i class="fa-solid fa-circle-exclamation me-1"></i>
+                        <strong>Critical Notice:</strong> Wiping this clinical timeline drops all historical downstream relational mappings including linked prescriptions and lab histories from the system server completely.
+                    </div>
+
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Deletion Record File</p>
+                    <h3 class="fw-bold text-dark mb-1">Patient: @Model.Patient?.FirstName @Model.Patient?.LastName</h3>
+                    <span class="text-muted small">Record Reference Sequence: #@Model.RecordId</span>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start my-4 gap-1">
+                        <div class="small"><strong>Visit Timeline Date:</strong> @Model.VisitDate.ToString("dd MMMM yyyy")</div>
+                        <div class="small text-truncate"><strong>Logged Diagnosis Summary:</strong> @Model.Diagnosis</div>
+                        <div class="small"><strong>Attending Doctor:</strong> Dr. @Model.Doctor?.LastName</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="RecordId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm"><i class="fa-solid fa-user-slash me-2"></i>Permanently Wipe Record</button>
+                            <a asp-action="Details" asp-route-id="@Model.RecordId" class="btn btn-outline-secondary btn-sm mt-1">Cancel & Retain</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

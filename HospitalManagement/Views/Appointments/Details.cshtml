@@ -1,0 +1,71 @@
+﻿@model HospitalManagement.Models.Appointment
+
+@{
+    ViewData["Title"] = "Appointment Specification File";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-circle-info me-2"></i>Appointment Allocation Data</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4 pb-3 border-bottom">
+                        <div class="bg-light border text-info rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:65px; height:65px;">
+                            <i class="fa-regular fa-calendar-check fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-0">Slot ID Ticket: #@Model.AppointmentId</h4>
+                        <span class="text-muted small">Logged Schedule Mapping Matrix</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Timeline Matrix</div>
+                        <div class="col-sm-8 text-dark fw-bold"><i class="fa-regular fa-clock me-1 text-muted"></i>@Model.AppointmentDate.ToString("dd MMMM yyyy, hh:mm tt")</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Patient Target</div>
+                        <div class="col-sm-8 text-primary fw-bold">@Model.Patient?.FirstName @Model.Patient?.LastName</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Assigned Clinician</div>
+                        <div class="col-sm-8 text-secondary fw-semibold">Dr. @Model.Doctor?.FirstName @Model.Doctor?.LastName</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Queue Condition</div>
+                        <div class="col-sm-8">
+                            <span class="badge bg-light text-dark border px-2.5 py-1.5 fw-bold">@Model.Status</span>
+                        </div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Encounter Reason</div>
+                        <div class="col-sm-8 text-dark small bg-light p-2.5 rounded border fst-italic">"@Model.Reason"</div>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        @if (User.IsInRole("Admin") || User.IsInRole("Receptionist"))
+                        {
+                            <div class="col-6">
+                                <a asp-action="Edit" asp-route-id="@Model.AppointmentId" class="btn btn-primary fw-bold w-100 py-2"><i class="fa-solid fa-wrench me-2"></i>Reschedule</a>
+                            </div>
+                        }
+                        <div class="col-@((User.IsInRole("Admin") || User.IsInRole("Receptionist")) ? "6" : "12")">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">Return to Master Logs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

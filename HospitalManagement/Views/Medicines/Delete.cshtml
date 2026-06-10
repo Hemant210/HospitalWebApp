@@ -1,0 +1,39 @@
+﻿@model HospitalManagement.Models.Medicine
+
+@{
+    ViewData["Title"] = "Decommission Drug Entity";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-danger border-2">
+                <div class="card-header bg-danger text-white py-3 text-center shadow-sm">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-ban me-2"></i>Confirm Asset Disposal</h5>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="alert alert-warning border text-start small mb-4">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                        <strong>Database Constraint Alert:</strong> Dropping this active medication formula profile breaks cascading relational histories inside historic prescription line matrices.
+                    </div>
+
+                    <p class="text-muted mb-1 text-uppercase small fw-bold">Target Chemical Identity</p>
+                    <h3 class="fw-bold text-dark mb-4">@Model.Name</h3>
+
+                    <div class="card bg-light p-3 border-0 rounded text-start mb-4">
+                        <div class="small mb-1"><strong>Category Classification:</strong> @Model.Category</div>
+                        <div class="small"><strong>Remaining Active Units Dump:</strong> @Model.StockQty Pieces</div>
+                    </div>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="MedicineId" />
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger fw-bold py-2 shadow-sm"><i class="fa-solid fa-trash-can me-2"></i>Purge Asset From Registry</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Retain Stock Profile</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

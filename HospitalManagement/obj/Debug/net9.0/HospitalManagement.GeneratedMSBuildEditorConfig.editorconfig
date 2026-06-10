@@ -40,6 +40,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaXNzaW9uc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Admissions/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaXNzaW9uc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Admissions/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaXNzaW9uc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Admissions/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaXNzaW9uc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,6 +58,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Appointments/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Appointments/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Appointments/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Appointments/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Appointments/Index.cshtml]
@@ -168,8 +188,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/MedicalRecords/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZHNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/MedicalRecords/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZHNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/MedicalRecords/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFJlY29yZHNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/MedicalRecords/Index.cshtml]
@@ -178,6 +206,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Medicines/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNpbmVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Medicines/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNpbmVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Medicines/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNpbmVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Medicines/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNpbmVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Medicines/Index.cshtml]

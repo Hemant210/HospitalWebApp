@@ -1,53 +1,90 @@
 ﻿@model IEnumerable<HospitalManagement.Models.Prescription>
+@using HospitalManagement.Auth
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Prescription Directory";
 }
 
-<h1>Index</h1>
+<div class="container-fluid pt-4 px-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+        <h2 class="fw-bold text-dark m-0">
+            <i class="fa-solid fa-file-prescription text-primary me-2"></i>Pharmacy RX Logs
+        </h2>
+    </div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RecordId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrescribedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Notes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Doctor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecordId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrescribedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Doctor.FirstName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PrescriptionId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PrescriptionId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PrescriptionId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="card shadow-sm border-0 mb-4">
+        <div class="card-body p-3 bg-light rounded">
+            <form asp-action="Index" method="get" class="row g-2 align-items-center">
+                <div class="col-10 col-md-5">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-white border-end-0"><i class="fa-solid fa-magnifying-glass text-muted"></i></span>
+                        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control border-start-0" placeholder="Search Patient, Doctor, or Notes..." />
+                    </div>
+                </div>
+                <div class="col-2 col-md-auto d-flex gap-2">
+                    <button type="submit" class="btn btn-sm btn-secondary fw-bold px-3">Filter</button>
+                    @if (ViewData["CurrentFilter"] != null)
+                    {
+                        <a asp-action="Index" class="btn btn-sm btn-outline-secondary border bg-white"><i class="fa-solid fa-xmark"></i></a>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3 text-uppercase fs-7 text-muted">RX ID</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Date</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Patient</th>
+                            <th class="py-3 text-uppercase fs-7 text-muted">Prescriber</th>
+                            <th class="pe-4 py-3 text-end text-uppercase fs-7 text-muted">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-dark">RX-#@item.PrescriptionId</td>
+                                <td class="text-secondary fw-medium">@item.PrescribedDate.ToString("dd MMM yyyy")</td>
+                                <td class="fw-bold text-primary">@(item.MedicalRecord?.Patient?.FirstName) @(item.MedicalRecord?.Patient?.LastName)</td>
+                                <td class="text-muted">Dr. @item.Doctor?.LastName</td>
+                                <td class="pe-4 text-end">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.PrescriptionId" class="btn btn-sm btn-outline-info" title="View Document">
+                                            <i class="fa-solid fa-eye"></i> Details
+                                        </a>
+                                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Doctor))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.PrescriptionId" class="btn btn-sm btn-outline-secondary">
+                                                <i class="fa-solid fa-pen"></i>
+                                            </a>
+                                        }
+                                        @if (User.IsInRole(HospitalRoles.Admin))
+                                        {
+                                            <a asp-action="Delete" asp-route-id="@item.PrescriptionId" class="btn btn-sm btn-outline-danger">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="text-center text-muted py-5">
+                    <i class="fa-solid fa-prescription-bottle fs-2 mb-3 text-light"></i>
+                    <p class="mb-0">No prescription records found.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

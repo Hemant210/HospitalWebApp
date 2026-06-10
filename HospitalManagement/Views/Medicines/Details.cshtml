@@ -1,0 +1,67 @@
+﻿@model HospitalManagement.Models.Medicine
+@using HospitalManagement.Auth
+
+@{
+    ViewData["Title"] = "Item Specifications";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-magnifying-glass-chart me-2"></i>Pharmaceutical Asset Sheet</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="bg-light border text-info rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:65px; height:65px;">
+                            <i class="fa-solid fa-tablets fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-0">@Model.Name</h4>
+                        <span class="text-muted small">Asset Core Sequence: #@Model.MedicineId</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-5 text-muted fw-bold text-uppercase small">Functional Branch</div>
+                        <div class="col-7 text-dark fw-medium">@Model.Category</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-5 text-muted fw-bold text-uppercase small">Current Stock Level</div>
+                        <div class="col-7">
+                            @if (Model.StockQty <= 10)
+                            {
+                                <span class="text-danger fw-bold"><i class="fa-solid fa-circle-exclamation me-1"></i>@Model.StockQty Units Remaining</span>
+                            }
+                            else
+                            {
+                                <span class="text-success fw-bold">@Model.StockQty Units (Stable)</span>
+                            }
+                        </div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-4">
+                        <div class="col-5 text-muted fw-bold text-uppercase small">Base Unit Valuation</div>
+                        <div class="col-7 text-dark fw-bold fs-5">₹@Model.UnitPrice.ToString("N2")</div>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Pharmacist))
+                        {
+                            <div class="col-6">
+                                <a asp-action="Edit" asp-route-id="@Model.MedicineId" class="btn btn-primary fw-bold w-100 py-2"><i class="fa-solid fa-boxes-stacked me-2"></i>Adjust Level</a>
+                            </div>
+                        }
+                        <div class="col-@(User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Pharmacist) ? "6" : "12")">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">Return to Stock</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model HospitalManagement.Models.Admission
+
+@{
+    ViewData["Title"] = "Case Details";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-circle-info me-2"></i>Inpatient Admission Overview File</h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="text-center mb-4 border-bottom pb-3">
+                        <div class="bg-light border text-info rounded-circle d-inline-flex align-items-center justify-content-center mb-2" style="width:65px; height:65px;">
+                            <i class="fa-solid fa-hospital-user fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold text-dark mb-0">@Model.Patient?.FirstName @Model.Patient?.LastName</h4>
+                        <span class="text-muted small">Admission Log Ticket Sequence: #@Model.AdmissionId</span>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Check-In Clock</div>
+                        <div class="col-sm-8 text-dark fw-semibold"><i class="fa-regular fa-clock me-1 text-muted"></i>@Model.AdmitDate.ToString("dd MMMM yyyy, hh:mm tt")</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Discharge Clock</div>
+                        <div class="col-sm-8">
+                            @if (Model.DischargeDate.HasValue)
+                            {
+                                <span class="text-success fw-bold"><i class="fa-solid fa-calendar-check me-1"></i>@Model.DischargeDate.Value.ToString("dd MMMM yyyy, hh:mm tt")</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark"><i class="fa-solid fa-procedures me-1"></i>Actively Hospitalized Bed Asset</span>
+                            }
+                        </div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Assigned Unit</div>
+                        <div class="col-sm-8 text-primary fw-semibold"><i class="fa-solid fa-hotel me-1 text-muted"></i>@(Model.Bed?.Ward?.WardName) - Bed Unit #@Model.Bed?.BedNumber</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-3">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Attending Clinician</div>
+                        <div class="col-sm-8 text-dark">Dr. @Model.Doctor?.FirstName @Model.Doctor?.LastName</div>
+                    </div>
+                    <hr class="text-muted my-2" />
+
+                    <div class="row mb-2">
+                        <div class="col-sm-4 text-muted fw-bold text-uppercase small">Medical Reason</div>
+                        <div class="col-sm-8 text-secondary small bg-light p-2.5 rounded border fst-italic">"@Model.Reason"</div>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a asp-action="Edit" asp-route-id="@Model.AdmissionId" class="btn btn-primary fw-bold w-100 py-2"><i class="fa-solid fa-user-gear me-2"></i>Update Case</a>
+                        </div>
+                        <div class="col-6">
+                            <a asp-action="Index" class="btn btn-outline-secondary w-100 py-2">Back to Dashboard</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

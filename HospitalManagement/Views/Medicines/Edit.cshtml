@@ -1,43 +1,44 @@
 ﻿@model HospitalManagement.Models.Medicine
 
 @{
-    ViewData["Title"] = "Add Medicine";
+    ViewData["Title"] = "Adjust Medicine Information";
 }
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-6 col-lg-5">
             <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white py-3">
-                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-capsules me-2"></i>Register New Drug Entity</h5>
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-box-archive me-2"></i>Adjust Medicine / Stock Metrics</h5>
                 </div>
                 <div class="card-body p-4">
-                    <form asp-action="Create">
+                    <form asp-action="Edit">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="MedicineId" />
 
                         <div class="form-group mb-3">
                             <label asp-for="Name" class="control-label fw-bold mb-1">Commercial Drug Name</label>
-                            <input asp-for="Name" class="form-control" placeholder="e.g. Paracetamol 650mg, Amoxicillin" />
+                            <input asp-for="Name" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger small"></span>
                         </div>
 
                         <div class="form-group mb-3">
                             <label asp-for="Category" class="control-label fw-bold mb-1">Pharma Category</label>
-                            <input asp-for="Category" class="form-control" placeholder="e.g. Analgesic, Antibiotic, Antiviral" />
+                            <input asp-for="Category" class="form-control" />
                             <span asp-validation-for="Category" class="text-danger small"></span>
                         </div>
 
                         <div class="row">
                             <div class="col-6 mb-4">
-                                <label asp-for="StockQty" class="control-label fw-bold mb-1">Initial Quantity</label>
-                                <input asp-for="StockQty" class="form-control" type="number" min="0" placeholder="0" />
+                                <label asp-for="StockQty" class="control-label fw-bold mb-1">Adjust Quantity Levels</label>
+                                <input asp-for="StockQty" class="form-control" type="number" min="0" />
                                 <span asp-validation-for="StockQty" class="text-danger small"></span>
                             </div>
                             <div class="col-6 mb-4">
                                 <label asp-for="UnitPrice" class="control-label fw-bold mb-1">Cost Per Unit</label>
                                 <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" placeholder="0.00" />
+                                    <input asp-for="UnitPrice" class="form-control" type="number" step="0.01" />
                                 </div>
                                 <span asp-validation-for="UnitPrice" class="text-danger small"></span>
                             </div>
@@ -46,8 +47,8 @@
                         <hr class="my-4 text-muted" />
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-save me-2"></i>Save to Pharmacy Catalog</button>
-                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel Configuration</a>
+                            <button type="submit" class="btn btn-warning fw-bold py-2"><i class="fa-solid fa-check-double me-2"></i>Commit Stock Variations</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Discard Actions</a>
                         </div>
                     </form>
                 </div>

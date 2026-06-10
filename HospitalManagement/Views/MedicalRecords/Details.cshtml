@@ -1,80 +1,82 @@
 ﻿@model HospitalManagement.Models.MedicalRecord
+@using HospitalManagement.Auth
 
 @{
-    ViewData["Title"] = "Medical Record Details";
+    ViewData["Title"] = "Case Details";
 }
 
 <div class="container mt-4 mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2><i class="fa-solid fa-notes-medical text-primary me-2"></i>Record #@Model.RecordId</h2>
-        <div>
-            <a asp-controller="Prescriptions" asp-action="Create" asp-route-recordId="@Model.RecordId" class="btn btn-primary fw-bold shadow-sm">
+    <div class="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-3 mb-4">
+        <h2><i class="fa-solid fa-notes-medical text-primary me-2"></i>Case Profile #@Model.RecordId</h2>
+        <div class="d-flex gap-2 flex-wrap">
+            <a asp-controller="Prescriptions" asp-action="Create" asp-route-recordId="@Model.RecordId" class="btn btn-primary fw-bold shadow-sm btn-sm px-3">
                 <i class="fa-solid fa-pills me-1"></i> Write Prescription
             </a>
-            <a asp-controller="LabTests" asp-action="Create" asp-route-recordId="@Model.RecordId" class="btn btn-warning fw-bold shadow-sm">
+            <a asp-controller="LabTests" asp-action="Create" asp-route-recordId="@Model.RecordId" class="btn btn-warning fw-bold shadow-sm btn-sm px-3">
                 <i class="fa-solid fa-flask-vial me-1"></i> Order Lab Test
             </a>
         </div>
     </div>
 
     <div class="card shadow-sm border-0 mb-4">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <h6 class="text-muted text-uppercase mb-1">Patient Name</h6>
-                    <h5 class="fw-bold">@Model.Patient?.FirstName @Model.Patient?.LastName</h5>
+        <div class="card-body p-4">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <h6 class="text-muted text-uppercase small fw-bold mb-1">Patient Name</h6>
+                    <h4 class="fw-bold text-primary">@Model.Patient?.FirstName @Model.Patient?.LastName</h4>
                 </div>
-                <div class="col-md-6 mb-2">
-                    <h6 class="text-muted text-uppercase mb-1">Attending Doctor</h6>
-                    <h5 class="fw-bold">Dr. @Model.Doctor?.FirstName @Model.Doctor?.LastName</h5>
+                <div class="col-md-6">
+                    <h6 class="text-muted text-uppercase small fw-bold mb-1">
+                        Attending Clinician</h4>
+                        <h4 class="fw-bold text-dark">Dr. @Model.Doctor?.FirstName @Model.Doctor?.LastName</h4>
                 </div>
             </div>
-            <hr />
-            <div class="row mt-3">
+            <hr class="text-muted" />
+            <div class="row g-3 mt-1">
                 <div class="col-md-4">
-                    <h6 class="text-muted fw-bold">Visit Date:</h6>
-                    <p>@Model.VisitDate.ToString("dd MMM yyyy")</p>
+                    <h6 class="text-muted small fw-bold mb-0">Visit Encounter Date:</h6>
+                    <p class="fw-semibold">@Model.VisitDate.ToString("dd MMM yyyy")</p>
                 </div>
                 <div class="col-md-8">
-                    <h6 class="text-muted fw-bold">Vitals:</h6>
-                    <p>@(string.IsNullOrEmpty(Model.Vitals) ? "No vitals recorded" : Model.Vitals)</p>
+                    <h6 class="text-muted small fw-bold mb-0">Patient Vitals Snapshot:</h6>
+                    <p class="text-dark fw-medium">@(string.IsNullOrEmpty(Model.Vitals) ? "No vitals registered." : Model.Vitals)</p>
                 </div>
             </div>
             <div class="mt-2">
-                <h6 class="text-muted fw-bold">Diagnosis:</h6>
-                <p class="fs-5 text-dark">@Model.Diagnosis</p>
+                <h6 class="text-muted small fw-bold mb-0">Diagnosis:</h6>
+                <p class="fs-5 text-dark fw-semibold">@Model.Diagnosis</p>
             </div>
             <div class="mt-2">
-                <h6 class="text-muted fw-bold">Clinical Notes:</h6>
-                <p>@(string.IsNullOrEmpty(Model.Notes) ? "No additional notes." : Model.Notes)</p>
+                <h6 class="text-muted small fw-bold mb-0">Clinical/Progress Notes:</h6>
+                <p class="text-secondary">@(string.IsNullOrEmpty(Model.Notes) ? "No added diagnostic notes." : Model.Notes)</p>
             </div>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <h4 class="mb-3 text-secondary"><i class="fa-solid fa-file-prescription me-2"></i>Active Prescriptions</h4>
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <h4 class="mb-3 text-secondary"><i class="fa-solid fa-prescription-bottle-medical me-2"></i>Active Prescriptions</h4>
             @if (Model.Prescriptions != null && Model.Prescriptions.Any())
             {
                 foreach (var rx in Model.Prescriptions)
                 {
-                    <div class="card border-primary mb-3 shadow-sm">
-                        <div class="card-header bg-primary text-white py-2 d-flex justify-content-between">
-                            <span>RX #@rx.PrescriptionId</span>
-                            <span>@rx.PrescribedDate.ToString("dd MMM yyyy")</span>
+                    <div class="card border border-primary-subtle mb-3 shadow-sm">
+                        <div class="card-header bg-primary text-white py-2 d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">RX Sequence: #@rx.PrescriptionId</span>
+                            <span class="small bg-white text-primary fw-bold px-2 py-0.5 rounded">@rx.PrescribedDate.ToString("dd MMM yyyy")</span>
                         </div>
                         <ul class="list-group list-group-flush">
                             @foreach (var item in rx.PrescriptionItems)
                             {
-                                <li class="list-group-item">
-                                    <strong>@item.Medicine?.Name</strong> <br />
-                                    <small class="text-muted">Dosage: @item.Dosage | Duration: @item.DurationDays Days</small>
+                                <li class="list-group-item py-2.5">
+                                    <div class="fw-bold text-dark">@item.Medicine?.Name</div>
+                                    <div class="small text-muted">Dosage: <span class="fw-semibold">@item.Dosage</span> | Duration: <span class="fw-semibold">@item.DurationDays Days</span></div>
                                 </li>
                             }
                         </ul>
                         <div class="card-footer bg-light p-2 text-end">
-                            <a asp-controller="PrescriptionItems" asp-action="Create" asp-route-prescriptionId="@rx.PrescriptionId" class="btn btn-sm btn-outline-primary">
-                                + Add Medicine to RX
+                            <a asp-controller="PrescriptionItems" asp-action="Create" asp-route-prescriptionId="@rx.PrescriptionId" class="btn btn-xs btn-outline-primary fw-semibold">
+                                <i class="fa-solid fa-plus me-1"></i>Add Medicine
                             </a>
                         </div>
                     </div>
@@ -82,42 +84,48 @@
             }
             else
             {
-                <div class="alert alert-light border text-muted">No prescriptions written yet.</div>
+                <div class="alert alert-light border text-muted py-4">No prescriptions linked to this medical history file.</div>
             }
         </div>
 
-        <div class="col-md-6">
-            <h4 class="mb-3 text-secondary"><i class="fa-solid fa-microscope me-2"></i>Lab Tests</h4>
+        <div class="col-lg-6">
+            <h4 class="mb-3 text-secondary"><i class="fa-solid fa-microscope me-2"></i>Lab & Diagnostic Panels</h4>
             @if (Model.LabTests != null && Model.LabTests.Any())
             {
                 <div class="list-group shadow-sm">
                     @foreach (var lab in Model.LabTests)
                     {
-                        <a asp-controller="LabTests" asp-action="Details" asp-route-id="@lab.TestId" class="list-group-item list-group-item-action">
-                            <div class="d-flex w-100 justify-content-between align-items-center">
-                                <h6 class="mb-1 fw-bold">@lab.TestName</h6>
-                                <span class="badge @(lab.Status.ToString() == "Completed" ? "bg-success" : "bg-warning text-dark")">
-                                    @lab.Status
-                                </span>
+                        <div class="list-group-item p-3">
+                            <div class="d-flex w-100 justify-content-between align-items-center mb-1">
+                                <h6 class="mb-0 fw-bold text-dark">@lab.TestName</h6>
+                                <span class="badge @(lab.Status.ToString() == "Completed" ? "bg-success" : "bg-warning text-dark") fw-bold">@lab.Status</span>
                             </div>
-                            <small class="text-muted">Ordered: @lab.TestDate.ToString("dd MMM yyyy")</small>
+                            <small class="text-muted d-block">Issued: @lab.TestDate.ToString("dd MMM yyyy")</small>
                             @if (!string.IsNullOrEmpty(lab.Result))
                             {
-                                <p class="mb-0 mt-2 small text-dark"><strong>Result:</strong> @lab.Result</p>
+                                <div class="bg-light border rounded p-2 mt-2 small text-dark fw-medium"><strong>Result Data:</strong> @lab.Result</div>
                             }
-                        </a>
+                        </div>
                     }
                 </div>
             }
             else
             {
-                <div class="alert alert-light border text-muted">No lab tests ordered.</div>
+                <div class="alert alert-light border text-muted py-4">No diagnostic panel labs issued during this encounter loop.</div>
             }
         </div>
     </div>
 
-    <div class="mt-4">
-        <a asp-action="Edit" asp-route-id="@Model?.RecordId" class="btn btn-outline-secondary">Edit Record</a> |
-        <a asp-action="Index" class="text-decoration-none ms-2">Back to List</a>
+    <div class="mt-4 border-top pt-3 d-flex align-items-center gap-2">
+        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Doctor))
+        {
+            <a asp-action="Edit" asp-route-id="@Model?.RecordId" class="btn btn-warning fw-bold px-4"><i class="fa-solid fa-user-pen me-1"></i>Edit Record</a>
+        }
+        @if (User.IsInRole(HospitalRoles.Admin))
+        {
+            <a asp-action="Delete" asp-route-id="@Model?.RecordId" class="btn btn-outline-danger fw-bold"><i class="fa-solid fa-trash"></i> Delete</a>
+        }
+        <span class="text-muted">|</span>
+        <a asp-action="Index" class="btn btn-link text-decoration-none p-0"><i class="fa-solid fa-reply me-1"></i>Back to Master Logs</a>
     </div>
 </div>

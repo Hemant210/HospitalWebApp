@@ -1,72 +1,67 @@
 ﻿@model HospitalManagement.Models.Patient
+@using HospitalManagement.Auth
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Patient Overview";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-id-card-clip me-2"></i>Master Patient Record</h5>
+                    <span class="badge bg-white text-info fw-bold">UHN: #@Model.PatientId</span>
+                </div>
+                <div class="card-body p-4">
+                    <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+                        <div class="bg-light border text-primary rounded-circle d-inline-flex align-items-center justify-content-center me-3" style="width: 70px; height: 70px;">
+                            <i class="fa-solid fa-user fs-2"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold text-dark mb-0">@Model.FirstName @Model.LastName</h3>
+                            @if (!string.IsNullOrEmpty(Model.BloodGroup))
+                            {
+                                <span class="badge bg-danger text-white mt-1 fs-6"><i class="fa-solid fa-droplet me-1"></i>Type @Model.BloodGroup</span>
+                            }
+                        </div>
+                    </div>
 
-<div>
-    <h4>Patient</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DOB)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DOB)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BloodGroup)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BloodGroup)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InsuranceNo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InsuranceNo)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.PatientId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="row g-4 mb-4">
+                        <div class="col-sm-6">
+                            <h6 class="text-muted fw-bold text-uppercase small mb-2"><i class="fa-solid fa-calendar-day me-2 text-info"></i>Demographics</h6>
+                            <div class="bg-light p-3 rounded">
+                                <p class="mb-1"><strong>DOB:</strong> @(Model.DOB?.ToString("dd MMM yyyy") ?? "Not Provided")</p>
+                                <p class="mb-1"><strong>Age:</strong> @(Model.DOB.HasValue ? (DateTime.Today.Year - Model.DOB.Value.Year) + " yrs" : "N/A")</p>
+                                <p class="mb-0"><strong>Gender:</strong> @(string.IsNullOrEmpty(Model.Gender) ? "Unknown" : Model.Gender)</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <h6 class="text-muted fw-bold text-uppercase small mb-2"><i class="fa-solid fa-address-book me-2 text-info"></i>Contact Info</h6>
+                            <div class="bg-light p-3 rounded">
+                                <p class="mb-1"><i class="fa-solid fa-phone me-2 text-muted"></i>@(string.IsNullOrEmpty(Model.Phone) ? "N/A" : Model.Phone)</p>
+                                <p class="mb-1 text-truncate" title="@Model.Email"><i class="fa-solid fa-envelope me-2 text-muted"></i>@(string.IsNullOrEmpty(Model.Email) ? "N/A" : Model.Email)</p>
+                                <p class="mb-0"><i class="fa-solid fa-location-dot me-2 text-muted"></i>@(string.IsNullOrEmpty(Model.Address) ? "N/A" : Model.Address)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-primary-subtle p-3 rounded border border-primary-subtle mb-4">
+                        <h6 class="text-primary-emphasis fw-bold mb-1"><i class="fa-solid fa-shield-heart me-2"></i>Insurance Policy Reference</h6>
+                        <p class="mb-0 text-dark">@(string.IsNullOrEmpty(Model.InsuranceNo) ? "No active insurance policy linked to this account." : Model.InsuranceNo)</p>
+                    </div>
+
+                    <hr class="my-4 text-muted" />
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4"><i class="fa-solid fa-arrow-left me-2"></i>Directory</a>
+                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Receptionist))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.PatientId" class="btn btn-primary fw-bold px-4"><i class="fa-solid fa-user-pen me-2"></i>Modify Profile</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

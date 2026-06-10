@@ -1,71 +1,72 @@
 ﻿@model HospitalManagement.Models.LabTest
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Update Lab Results";
 }
 
-<h1>Edit</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-warning text-dark py-3">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-pen me-2"></i>Update Lab Results & Status</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="TestId" />
+                        <input type="hidden" asp-for="RecordId" />
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="Cost" />
+                        <input type="hidden" asp-for="TestName" />
 
-<h4>LabTest</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TestId" />
-            <div class="form-group">
-                <label asp-for="RecordId" class="control-label"></label>
-                <select asp-for="RecordId" class="form-control" asp-items="ViewBag.RecordId"></select>
-                <span asp-validation-for="RecordId" class="text-danger"></span>
+                        <div class="alert alert-secondary d-flex justify-content-between align-items-center mb-4">
+                            <div>
+                                <span class="d-block text-muted small text-uppercase fw-bold">Test Ordered:</span>
+                                <span class="fs-5 fw-bold text-dark">@Model.TestName</span>
+                            </div>
+                            <div class="text-end">
+                                <span class="d-block text-muted small text-uppercase fw-bold">Ordered On:</span>
+                                <span class="fw-semibold">@Model.TestDate.ToString("dd MMM yyyy")</span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TechnicianId" class="control-label fw-bold mb-1">Assigned Lab Technician</label>
+                                <select asp-for="TechnicianId" class="form-select" asp-items="ViewBag.TechnicianId">
+                                    <option value="">-- Select Technician --</option>
+                                </select>
+                                <span asp-validation-for="TechnicianId" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Status" class="control-label fw-bold mb-1">Process Status</label>
+                                <select asp-for="Status" class="form-select border-warning shadow-sm" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.LabTestStatus>()"></select>
+                                <span asp-validation-for="Status" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="Result" class="control-label fw-bold mb-1 text-primary">Diagnostic Findings & Results</label>
+                            <textarea asp-for="Result" class="form-control border-primary" rows="6" placeholder="Enter objective diagnostic metrics, reference ranges, and analytical conclusions here..."></textarea>
+                            <span asp-validation-for="Result" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4 text-muted" />
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-warning fw-bold py-2"><i class="fa-solid fa-square-check me-2"></i>Save Lab Findings</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="PatientId" class="control-label"></label>
-                <select asp-for="PatientId" class="form-control" asp-items="ViewBag.PatientId"></select>
-                <span asp-validation-for="PatientId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TechnicianId" class="control-label"></label>
-                <select asp-for="TechnicianId" class="form-control" asp-items="ViewBag.TechnicianId"></select>
-                <span asp-validation-for="TechnicianId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TestName" class="control-label"></label>
-                <input asp-for="TestName" class="form-control" />
-                <span asp-validation-for="TestName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cost" class="control-label"></label>
-                <input asp-for="Cost" class="form-control" />
-                <span asp-validation-for="Cost" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Result" class="control-label"></label>
-                <input asp-for="Result" class="form-control" />
-                <span asp-validation-for="Result" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TestDate" class="control-label"></label>
-                <input asp-for="TestDate" class="form-control" />
-                <span asp-validation-for="TestDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                @* <select asp-for="Status" class="form-control"></select> *@
-                <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.LabTestStatus>()">
-                </select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -1,66 +1,66 @@
 ﻿@model HospitalManagement.Models.LabTest
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Lab Report Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-info text-white py-3 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-waveform me-2"></i>Official Laboratory Report</h5>
+                    <span class="badge bg-white text-dark fs-6 border border-light">ID: #@Model.TestId</span>
+                </div>
+                <div class="card-body p-4">
+                    <div class="row mb-4">
+                        <div class="col-sm-6 border-end">
+                            <h6 class="text-muted text-uppercase small fw-bold mb-1">Patient Details</h6>
+                            <h5 class="fw-bold text-primary mb-0">@Model.Patient?.FirstName @Model.Patient?.LastName</h5>
+                        </div>
+                        <div class="col-sm-6 ps-4">
+                            <h6 class="text-muted text-uppercase small fw-bold mb-1">Testing Metric</h6>
+                            <h5 class="fw-bold text-dark mb-0">@Model.TestName</h5>
+                        </div>
+                    </div>
 
-<div>
-    <h4>LabTest</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TestName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TestName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Cost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Result)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Result)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TestDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TestDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MedicalRecord)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MedicalRecord.RecordId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Patient)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Patient.FirstName)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Technician)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Technician.FirstName)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.TestId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="card bg-light border-0 mb-4">
+                        <div class="card-body p-3 row">
+                            <div class="col-4">
+                                <span class="d-block text-muted small fw-bold">Date Ordered</span>
+                                <span class="fw-semibold">@Model.TestDate.ToString("dd MMM yyyy, HH:mm")</span>
+                            </div>
+                            <div class="col-4 border-start border-end text-center">
+                                <span class="d-block text-muted small fw-bold">Status</span>
+                                <span class="badge @(Model.Status.ToString() == "Completed" ? "bg-success" : "bg-warning text-dark")">@Model.Status</span>
+                            </div>
+                            <div class="col-4 text-end">
+                                <span class="d-block text-muted small fw-bold">Assigned Tech</span>
+                                <span class="fw-semibold">@(Model.Technician?.FirstName ?? "Pending Assignment")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h6 class="text-primary fw-bold text-uppercase border-bottom pb-2 mb-3"><i class="fa-solid fa-microscope me-2"></i>Diagnostic Results</h6>
+                        @if (!string.IsNullOrEmpty(Model.Result))
+                        {
+                            <div class="p-3 border rounded bg-white fs-5 text-dark" style="white-space: pre-wrap;">@Model.Result</div>
+                        }
+                        else
+                        {
+                            <div class="alert alert-secondary text-center text-muted fst-italic">Results are currently pending processing by the laboratory staff.</div>
+                        }
+                    </div>
+
+                    <hr class="text-muted my-4" />
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a asp-action="Index" class="btn btn-outline-secondary px-4"><i class="fa-solid fa-arrow-left me-2"></i>Back to Dashboard</a>
+                        <a asp-action="Edit" asp-route-id="@Model.TestId" class="btn btn-primary fw-bold px-4"><i class="fa-solid fa-file-pen me-2"></i>Update Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
