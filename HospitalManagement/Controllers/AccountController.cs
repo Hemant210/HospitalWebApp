@@ -18,21 +18,25 @@ namespace HospitalManagement.Controllers
 
         // GET: /Account/Login
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string? returnUrl = null)
         {
-            // If already logged in, redirect to Dashboard
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
             }
+
+            // Pass the returnUrl to the view so the form knows where to send them
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
         // POST: /Account/Login
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
+
             if (!ModelState.IsValid) return View(model);
 
             var user = await _userManager.FindByEmailAsync(model.Email);
@@ -42,11 +46,17 @@ namespace HospitalManagement.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Smart Routing: Send them to their requested page, or default to Dashboard
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return LocalRedirect(returnUrl);
+                    }
                     return RedirectToAction("Index", "Home");
                 }
             }
 
-            ModelState.AddModelError(string.Empty, "Invalid login attempt or account is inactive.");
+            // Security best practice: Keep failure messages generic
+            ModelState.AddModelError(string.Empty, "Invalid authentication attempt or account disabled.");
             return View(model);
         }
 
@@ -63,7 +73,7 @@ namespace HospitalManagement.Controllers
         [HttpGet]
         public IActionResult AccessDenied()
         {
-            return View(); // Create a simple view telling the user they don't have permission
+            return View();
         }
     }
 }
