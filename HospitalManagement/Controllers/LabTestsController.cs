@@ -18,7 +18,7 @@ namespace HospitalManagement.Controllers
             _context = context;
         }
 
-        // GET: LabTests (With Search Filter)
+        // GET: LabTests (With Search Filter & Smart Sorting)
         public async Task<IActionResult> Index(string searchString)
         {
             ViewData["CurrentFilter"] = searchString;
@@ -37,7 +37,16 @@ namespace HospitalManagement.Controllers
                                                       || l.Patient.LastName.Contains(searchString));
             }
 
-            return View(await labTestsQuery.AsNoTracking().ToListAsync());
+            // SMART FIX: Show ALL records, but order them by Status first, then Date.
+            // Because Enums are backed by integers (Pending = 0, Completed = 3, Cancelled = 4),
+            // OrderBy(l => l.Status) naturally pushes active tasks to the top and finished tasks to the bottom!
+            var sortedLabs = await labTestsQuery
+                .OrderBy(l => l.Status)
+                .ThenByDescending(l => l.TestDate)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(sortedLabs);
         }
 
         // GET: LabTests/Details/5
@@ -59,27 +68,7 @@ namespace HospitalManagement.Controllers
         // GET: LabTests/Create (SMART FLOW ADDED)
         public async Task<IActionResult> Create(int? recordId)
         {
-            // Format the Record dropdown to show Patient Names instead of just numbers
-            var records = _context.MedicalRecords.Include(m => m.Patient).ToList();
-            var recordList = records.Select(r => new {
-                RecordId = r.RecordId,
-                Display = $"Record #{r.RecordId} - {r.Patient?.FirstName} {r.Patient?.LastName}"
-            });
-
-            // If we came from the Medical Record page, auto-select the dropdowns!
-            if (recordId.HasValue)
-            {
-                var medicalRecord = await _context.MedicalRecords.FindAsync(recordId);
-                ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display", recordId);
-                ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", medicalRecord?.PatientId);
-            }
-            else
-            {
-                ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display");
-                ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName");
-            }
-
-            ViewData["TechnicianId"] = new SelectList(_context.Staffs, "StaffId", "FirstName");
+            PopulateSmartLabDropdowns(recordId);
             return View();
         }
 
@@ -97,9 +86,7 @@ namespace HospitalManagement.Controllers
                 return RedirectToAction("Details", "MedicalRecords", new { id = labTest.RecordId });
             }
 
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", labTest.PatientId);
-            ViewData["RecordId"] = new SelectList(_context.MedicalRecords, "RecordId", "RecordId", labTest.RecordId);
-            ViewData["TechnicianId"] = new SelectList(_context.Staffs, "StaffId", "FirstName", labTest.TechnicianId);
+            PopulateSmartLabDropdowns(labTest.RecordId, labTest.PatientId, labTest.TechnicianId);
             return View(labTest);
         }
 
@@ -111,9 +98,7 @@ namespace HospitalManagement.Controllers
             var labTest = await _context.LabTests.FindAsync(id);
             if (labTest == null) return NotFound();
 
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", labTest.PatientId);
-            ViewData["RecordId"] = new SelectList(_context.MedicalRecords, "RecordId", "RecordId", labTest.RecordId);
-            ViewData["TechnicianId"] = new SelectList(_context.Staffs, "StaffId", "FirstName", labTest.TechnicianId);
+            PopulateSmartLabDropdowns(labTest.RecordId, labTest.PatientId, labTest.TechnicianId, includeAll: true);
             return View(labTest);
         }
 
@@ -138,14 +123,12 @@ namespace HospitalManagement.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", labTest.PatientId);
-            ViewData["RecordId"] = new SelectList(_context.MedicalRecords, "RecordId", "RecordId", labTest.RecordId);
-            ViewData["TechnicianId"] = new SelectList(_context.Staffs, "StaffId", "FirstName", labTest.TechnicianId);
+            PopulateSmartLabDropdowns(labTest.RecordId, labTest.PatientId, labTest.TechnicianId, includeAll: true);
             return View(labTest);
         }
 
         // GET: LabTests/Delete/5
-        [Authorize(Roles = HospitalRoles.Admin)] // Only Admin should delete lab tests
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -176,9 +159,35 @@ namespace HospitalManagement.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool LabTestExists(int id)
+        // --- SMART FILTER LOGIC FOR LABS ---
+        private void PopulateSmartLabDropdowns(int? selectedRecordId = null, int? selectedPatientId = null, int? selectedTechId = null, bool includeAll = false)
         {
-            return _context.LabTests.Any(e => e.TestId == id);
+            var today = DateTime.Today;
+
+            var recordsQuery = _context.MedicalRecords.Include(m => m.Patient).AsQueryable();
+            var patientsQuery = _context.Patients.AsQueryable();
+
+            if (!includeAll)
+            {
+                recordsQuery = recordsQuery.Where(m => m.Patient.Admissions.Any(a => a.DischargeDate == null) || m.VisitDate.Date >= today);
+                patientsQuery = patientsQuery.Where(p => p.Admissions.Any(a => a.DischargeDate == null) || p.Appointments.Any(a => a.AppointmentDate.Date >= today));
+            }
+
+            var recordList = recordsQuery.Select(r => new {
+                RecordId = r.RecordId,
+                Display = $"Record #{r.RecordId} - {r.Patient.FirstName} {r.Patient.LastName}"
+            }).ToList();
+
+            var patientList = patientsQuery.Select(p => new {
+                PatientId = p.PatientId,
+                FullName = $"{p.FirstName} {p.LastName}"
+            }).ToList();
+
+            ViewData["RecordId"] = new SelectList(recordList, "RecordId", "Display", selectedRecordId);
+            ViewData["PatientId"] = new SelectList(patientList, "PatientId", "FullName", selectedPatientId);
+            ViewData["TechnicianId"] = new SelectList(_context.Staffs, "StaffId", "FirstName", selectedTechId);
         }
+
+        private bool LabTestExists(int id) => _context.LabTests.Any(e => e.TestId == id);
     }
 }

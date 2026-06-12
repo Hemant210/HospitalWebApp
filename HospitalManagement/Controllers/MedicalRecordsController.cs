@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HospitalManagement.Controllers
 {
-    [Authorize(Roles = HospitalRoles.MedicalTeam)] // Admin, Doctor, Nurse, LabTechnician can view lists/details
+    [Authorize(Roles = HospitalRoles.MedicalTeam)]
     public class MedicalRecordsController : Controller
     {
         private readonly HospitalDbContext _context;
@@ -36,7 +36,7 @@ namespace HospitalManagement.Controllers
                                                     || m.Diagnosis.Contains(searchString));
             }
 
-            return View(await recordsQuery.AsNoTracking().ToListAsync());
+            return View(await recordsQuery.OrderByDescending(r => r.VisitDate).AsNoTracking().ToListAsync());
         }
 
         // GET: MedicalRecords/Details/5
@@ -59,14 +59,10 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: MedicalRecords/Create
-        [Authorize(Roles = HospitalRoles.ClinicalStaff)] // Admin, Doctor, Nurse can create
+        [Authorize(Roles = HospitalRoles.ClinicalStaff)]
         public IActionResult Create(int? patientId)
         {
-            ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName");
-            ViewData["PatientId"] = patientId.HasValue
-                ? new SelectList(_context.Patients, "PatientId", "FirstName", patientId)
-                : new SelectList(_context.Patients, "PatientId", "FirstName");
-
+            PopulateSmartDropdowns(patientId);
             return View();
         }
 
@@ -82,13 +78,12 @@ namespace HospitalManagement.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Details), new { id = medicalRecord.RecordId });
             }
-            ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName", medicalRecord.DoctorId);
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", medicalRecord.PatientId);
+            PopulateSmartDropdowns(medicalRecord.PatientId, medicalRecord.DoctorId);
             return View(medicalRecord);
         }
 
         // GET: MedicalRecords/Edit/5
-        [Authorize(Roles = HospitalRoles.AdminOrDoctor)] // Admin and Doctor have edit authority
+        [Authorize(Roles = HospitalRoles.AdminOrDoctor)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -96,15 +91,15 @@ namespace HospitalManagement.Controllers
             var medicalRecord = await _context.MedicalRecords.FindAsync(id);
             if (medicalRecord == null) return NotFound();
 
-            ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName", medicalRecord.DoctorId);
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", medicalRecord.PatientId);
+            // When editing, we include all patients (even discharged) so the dropdown doesn't break on historic records
+            PopulateSmartDropdowns(medicalRecord.PatientId, medicalRecord.DoctorId, includeAllPatients: true);
             return View(medicalRecord);
         }
 
         // POST: MedicalRecords/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = HospitalRoles.AdminOrDoctor)] // Admin and Doctor have edit authority
+        [Authorize(Roles = HospitalRoles.AdminOrDoctor)]
         public async Task<IActionResult> Edit(int id, MedicalRecord medicalRecord)
         {
             if (id != medicalRecord.RecordId) return NotFound();
@@ -123,13 +118,12 @@ namespace HospitalManagement.Controllers
                 }
                 return RedirectToAction(nameof(Details), new { id = medicalRecord.RecordId });
             }
-            ViewData["DoctorId"] = new SelectList(_context.Doctors, "DoctorId", "FirstName", medicalRecord.DoctorId);
-            ViewData["PatientId"] = new SelectList(_context.Patients, "PatientId", "FirstName", medicalRecord.PatientId);
+            PopulateSmartDropdowns(medicalRecord.PatientId, medicalRecord.DoctorId, includeAllPatients: true);
             return View(medicalRecord);
         }
 
         // GET: MedicalRecords/Delete/5
-        [Authorize(Roles = HospitalRoles.Admin)] // ONLY Admin has delete authority
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -147,7 +141,7 @@ namespace HospitalManagement.Controllers
         // POST: MedicalRecords/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = HospitalRoles.Admin)] // ONLY Admin has delete authority
+        [Authorize(Roles = HospitalRoles.Admin)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var medicalRecord = await _context.MedicalRecords.FindAsync(id);
@@ -157,6 +151,36 @@ namespace HospitalManagement.Controllers
                 await _context.SaveChangesAsync();
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        // --- HELPER METHOD FOR SMART DROPDOWNS ---
+        private void PopulateSmartDropdowns(int? selectedPatientId = null, int? selectedDoctorId = null, bool includeAllPatients = false)
+        {
+            var doctors = _context.Doctors.Select(d => new {
+                DoctorId = d.DoctorId,
+                FullName = $"Dr. {d.FirstName} {d.LastName}"
+            }).ToList();
+
+            ViewData["DoctorId"] = new SelectList(doctors, "DoctorId", "FullName", selectedDoctorId);
+
+            var today = DateTime.Today;
+            var patientsQuery = _context.Patients.AsQueryable();
+
+            // The Core Fix: Filter out discharged patients unless explicitly told to include them
+            if (!includeAllPatients)
+            {
+                patientsQuery = patientsQuery.Where(p =>
+                    p.Admissions.Any(a => a.DischargeDate == null) || // Currently admitted in a bed
+                    p.Appointments.Any(a => a.AppointmentDate.Date >= today) // Or has an appointment today/future
+                );
+            }
+
+            var activePatients = patientsQuery.Select(p => new {
+                PatientId = p.PatientId,
+                FullName = $"{p.FirstName} {p.LastName} (ID: #{p.PatientId})"
+            }).ToList();
+
+            ViewData["PatientId"] = new SelectList(activePatients, "PatientId", "FullName", selectedPatientId);
         }
 
         private bool MedicalRecordExists(int id)
