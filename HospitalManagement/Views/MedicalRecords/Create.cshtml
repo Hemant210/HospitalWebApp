@@ -1,60 +1,67 @@
 ﻿@model HospitalManagement.Models.MedicalRecord
 
 @{
-    ViewData["Title"] = "Create Record";
+    ViewData["Title"] = "Create Clinical Record";
 }
 
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-8 col-lg-7">
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-primary text-white py-3">
-                    <h5 class="mb-0 fw-bold"><i class="fa-solid fa-file-medical me-2"></i>New Clinical Entry</h5>
+            <div class="card shadow-sm border-0 border-top border-primary border-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 fw-bold text-primary"><i class="fa-solid fa-notes-medical me-2"></i>New Clinical Entry</h5>
                 </div>
                 <div class="card-body p-4">
                     <form asp-action="Create">
                         <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
+                        <div class="row bg-light p-3 rounded mb-4 mx-0 border">
+                            <div class="col-md-6 mb-3 mb-md-0 border-end">
+                                <label asp-for="PatientId" class="control-label fw-bold mb-1 text-muted small text-uppercase">Active Patient Target</label>
+                                <select asp-for="PatientId" class="form-select border-primary shadow-sm" asp-items="ViewBag.PatientId">
+                                    <option value="">-- Select Active Patient --</option>
+                                </select>
+                                <span asp-validation-for="PatientId" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="DoctorId" class="control-label fw-bold mb-1 text-muted small text-uppercase">Attending Clinician</label>
+                                <select asp-for="DoctorId" class="form-select shadow-sm" asp-items="ViewBag.DoctorId">
+                                    <option value="">-- Select Doctor --</option>
+                                </select>
+                                <span asp-validation-for="DoctorId" class="text-danger small"></span>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label asp-for="PatientId" class="control-label fw-bold mb-1">Patient</label>
-                                <select asp-for="PatientId" class="form-select" asp-items="ViewBag.PatientId"></select>
+                                <label asp-for="VisitDate" class="control-label fw-bold mb-1">Encounter / Check-up Date</label>
+                                <input asp-for="VisitDate" class="form-control" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                <span asp-validation-for="VisitDate" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label asp-for="DoctorId" class="control-label fw-bold mb-1">Attending Doctor</label>
-                                <select asp-for="DoctorId" class="form-select" asp-items="ViewBag.DoctorId"></select>
+                                <label asp-for="Vitals" class="control-label fw-bold mb-1">Vitals (BP, Pulse, Temp)</label>
+                                <input asp-for="Vitals" class="form-control" placeholder="e.g., BP: 120/80, PR: 72, Temp: 98.6F" />
+                                <span asp-validation-for="Vitals" class="text-danger small"></span>
                             </div>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label asp-for="VisitDate" class="control-label fw-bold mb-1">Check-up Date</label>
-                            <input asp-for="VisitDate" class="form-control" type="date" />
-                            <span asp-validation-for="VisitDate" class="text-danger small"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Vitals" class="control-label fw-bold mb-1">Vitals (BP, Pulse, Temp)</label>
-                            <input asp-for="Vitals" class="form-control" placeholder="e.g. BP: 120/80, PR: 72, Temp: 98.6F" />
-                            <span asp-validation-for="Vitals" class="text-danger small"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="Diagnosis" class="control-label fw-bold mb-1"></label>
-                            <input asp-for="Diagnosis" class="form-control" placeholder="Primary Diagnosis summary" />
+                            <label asp-for="Diagnosis" class="control-label fw-bold mb-1">Primary Diagnosis Overview</label>
+                            <input asp-for="Diagnosis" class="form-control" placeholder="Enter brief summary of the primary diagnosis..." />
                             <span asp-validation-for="Diagnosis" class="text-danger small"></span>
                         </div>
 
                         <div class="form-group mb-4">
-                            <label asp-for="Notes" class="control-label fw-bold mb-1">Clinical Treatment Notes</label>
-                            <textarea asp-for="Notes" class="form-control" rows="4" placeholder="Enter symptoms, patient history or findings..."></textarea>
+                            <label asp-for="Notes" class="control-label fw-bold mb-1">Comprehensive Clinical Treatment Notes</label>
+                            <textarea asp-for="Notes" class="form-control" rows="5" placeholder="Document symptoms, patient history, physical findings, and treatment plan considerations..."></textarea>
                             <span asp-validation-for="Notes" class="text-danger small"></span>
                         </div>
 
                         <hr class="my-4 text-muted" />
 
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-floppy-disk me-2"></i>Save Record</button>
-                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1">Cancel</a>
+                            <button type="submit" class="btn btn-primary fw-bold py-2 shadow-sm"><i class="fa-solid fa-floppy-disk me-2"></i>Save Medical Record</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-1"><i class="fa-solid fa-xmark me-1"></i> Cancel & Discard</a>
                         </div>
                     </form>
                 </div>
