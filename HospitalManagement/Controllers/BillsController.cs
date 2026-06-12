@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Razorpay.Api; // Add this at the top
 
 namespace HospitalManagement.Controllers
 {
@@ -125,6 +126,36 @@ namespace HospitalManagement.Controllers
             };
 
             return View("Create", bill); // Send them to the Create screen to review the math
+        }
+
+        // Add this action inside your BillsController
+        [HttpPost]
+        public IActionResult CreateRazorpayOrder(decimal amount, string receiptId)
+        {
+            // WARNING: In production, put these keys in appsettings.json!
+            string key = "rzp_test_T0qaSLRiXeKGgW";
+            string secret = "LgoEWHaFnfoolyTSBm0deeuB";
+
+            try
+            {
+                RazorpayClient client = new RazorpayClient(key, secret);
+
+                // Razorpay expects the amount in PAISE (multiply by 100)
+                decimal amountInPaise = amount * 100;
+
+                Dictionary<string, object> options = new Dictionary<string, object>();
+                options.Add("amount", amountInPaise);
+                options.Add("receipt", receiptId);
+                options.Add("currency", "INR");
+
+                Order order = client.Order.Create(options);
+
+                return Json(new { orderId = order["id"], key = key });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
 
         // POST: Bills/Create

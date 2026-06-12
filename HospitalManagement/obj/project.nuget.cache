@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "0UuqkbZRfoE=",
+  "dgSpecHash": "Jgj/n3aKiO8=",
   "success": true,
   "projectFilePath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
   "expectedPackageFiles": [
@@ -136,6 +136,8 @@
     "C:\\Users\\digit\\.nuget\\packages\\nuget.projectmodel\\6.12.1\\nuget.projectmodel.6.12.1.nupkg.sha512",
     "C:\\Users\\digit\\.nuget\\packages\\nuget.protocol\\6.12.1\\nuget.protocol.6.12.1.nupkg.sha512",
     "C:\\Users\\digit\\.nuget\\packages\\nuget.versioning\\6.12.1\\nuget.versioning.6.12.1.nupkg.sha512",
+    "C:\\Users\\digit\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
+    "C:\\Users\\digit\\.nuget\\packages\\razorpay\\3.3.2\\razorpay.3.3.2.nupkg.sha512",
     "C:\\Users\\digit\\.nuget\\packages\\system.clientmodel\\1.0.0\\system.clientmodel.1.0.0.nupkg.sha512",
     "C:\\Users\\digit\\.nuget\\packages\\system.codedom\\7.0.0\\system.codedom.7.0.0.nupkg.sha512",
     "C:\\Users\\digit\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",

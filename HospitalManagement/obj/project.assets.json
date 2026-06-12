@@ -2555,6 +2555,32 @@
           }
         }
       },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Razorpay/3.3.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "Portable.BouncyCastle": "1.9.0"
+        },
+        "compile": {
+          "lib/net8.0/Razorpay.dll": {}
+        },
+        "runtime": {
+          "lib/net8.0/Razorpay.dll": {}
+        }
+      },
       "System.ClientModel/1.0.0": {
         "type": "package",
         "dependencies": {
@@ -7250,6 +7276,38 @@
         "nuget.versioning.nuspec"
       ]
     },
+    "Portable.BouncyCastle/1.9.0": {
+      "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "type": "package",
+      "path": "portable.bouncycastle/1.9.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/BouncyCastle.Crypto.dll",
+        "lib/net40/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "portable.bouncycastle.1.9.0.nupkg.sha512",
+        "portable.bouncycastle.nuspec"
+      ]
+    },
+    "Razorpay/3.3.2": {
+      "sha512": "t/BFZKYuCZI/if927DrG122ARokL3lAlRhf0PVUjhNFGqjbXc0o32zTOUPF+1Fz9izBoTMdoYn8wVL91Z76Mjg==",
+      "type": "package",
+      "path": "razorpay/3.3.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net47/Razorpay.dll",
+        "lib/net48/Razorpay.dll",
+        "lib/net6.0/Razorpay.dll",
+        "lib/net8.0/Razorpay.dll",
+        "lib/netstandard2.0/Razorpay.dll",
+        "razorpay.3.3.2.nupkg.sha512",
+        "razorpay.nuspec"
+      ]
+    },
     "System.ClientModel/1.0.0": {
       "sha512": "I3CVkvxeqFYjIVEP59DnjbeoGNfo/+SZrCLpRz2v/g0gpCHaEMPtWSY0s9k/7jR1rAsLNg2z2u1JRB76tPjnIw==",
       "type": "package",
@@ -8623,7 +8681,8 @@
       "Microsoft.EntityFrameworkCore.Design >= 9.0.12",
       "Microsoft.EntityFrameworkCore.SqlServer >= 9.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 9.0.12",
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.12"
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 9.0.12",
+      "Razorpay >= 3.3.2"
     ]
   },
   "packageFolders": {
@@ -8708,6 +8767,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[9.0.12, )"
+          },
+          "Razorpay": {
+            "target": "Package",
+            "version": "[3.3.2, )"
           }
         },
         "imports": [

@@ -830,3 +830,5 @@ C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagemen
 C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagement\obj\Debug\net9.0\HospitalManagement.pdb
 C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagement\obj\Debug\net9.0\HospitalManagement.genruntimeconfig.cache
 C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagement\obj\Debug\net9.0\ref\HospitalManagement.dll
+C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagement\bin\Debug\net9.0\BouncyCastle.Crypto.dll
+C:\Users\digit\Desktop\Exam\MSC ICT 2\ProjectC#\HospitalWebApp\HospitalManagement\bin\Debug\net9.0\Razorpay.dll

@@ -1,4 +1,4 @@
-﻿@model HospitalManagement.Models.Bill
+﻿@* @model HospitalManagement.Models.Bill
 
 @{
     ViewData["Title"] = "Update Payment";
@@ -68,4 +68,169 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+} *@
+
+
+
+
+@model HospitalManagement.Models.Bill
+
+@{
+    ViewData["Title"] = "Update Payment";
+    var balanceDue = Model.TotalAmount - Model.PaidAmount;
+}
+
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 border-top border-success border-4">
+                <div class="card-header bg-white py-3 text-center">
+                    <h4 class="mb-0 fw-bold text-success"><i class="fa-solid fa-cash-register me-2"></i>Receive Payment</h4>
+                    <p class="text-muted small mb-0 mt-1">Invoice Reference: INV-#@Model.BillId</p>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <h1 class="display-4 fw-bold text-dark mb-0">₹@balanceDue.ToString("N2")</h1>
+                    <p class="text-danger fw-bold text-uppercase small mb-4">Current Balance Due</p>
+
+                    <form asp-action="Edit" id="paymentForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="BillId" id="BillId" />
+
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="AdmissionId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+                        <input type="hidden" asp-for="DoctorFee" />
+                        <input type="hidden" asp-for="RoomCharges" />
+                        <input type="hidden" asp-for="LabCharges" />
+                        <input type="hidden" asp-for="MedicineCharges" />
+                        <input type="hidden" asp-for="BillDate" />
+                        <input type="hidden" asp-for="TotalAmount" id="TotalAmount" value="@Model.TotalAmount" />
+
+                        <div class="form-group mb-3 text-start">
+                            <label asp-for="PaidAmount" class="control-label fw-bold mb-1">Total Payment Collected</label>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text bg-light text-success fw-bold">₹</span>
+                                <input asp-for="PaidAmount" id="PaidAmount" class="form-control fw-bold text-success" type="number" step="0.01" />
+                            </div>
+                            <small class="text-muted">Enter the *cumulative* amount paid to date.</small>
+                            <span asp-validation-for="PaidAmount" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row text-start">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Discount" class="control-label fw-bold mb-1">Discount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="Discount" class="form-control" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="PaymentMode" class="control-label fw-bold mb-1">Payment Method</label>
+                                <select asp-for="PaymentMode" id="PaymentModeDropdown" class="form-select">
+                                    <option value="">-- Select Mode --</option>
+                                    <option value="Cash">Cash</option>
+                                    <option value="UPI">Direct UPI Transfer</option>
+                                    <option value="CreditCard">Online Gateway (Razorpay)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="DirectUpiBox" class="bg-primary-subtle border border-primary p-3 rounded mb-4 text-start" style="display: none;">
+                            <h6 class="fw-bold text-primary mb-2"><i class="fa-brands fa-google-pay me-2"></i>Scan or Transfer to UPI</h6>
+                            <p class="mb-1 text-dark"><strong>UPI ID:</strong> hospital-name@okicici</p>
+                            <p class="small text-muted mb-0">Please verify the transfer on your banking app before clicking 'Settle Account'.</p>
+                        </div>
+
+                        <div class="d-grid gap-2" id="ActionButtons">
+                            <button type="submit" id="StandardSubmitBtn" class="btn btn-success fw-bold py-2">
+                                <i class="fa-solid fa-vault me-2"></i>Settle Account Manually
+                            </button>
+
+                            <button type="button" id="RazorpayBtn" class="btn btn-dark fw-bold py-2" style="display: none;">
+                                <i class="fa-solid fa-credit-card me-2"></i>Pay via Razorpay
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <a asp-action="Index" class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-arrow-left me-1"></i> Cancel & Go Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modeDropdown = document.getElementById("PaymentModeDropdown");
+            const upiBox = document.getElementById("DirectUpiBox");
+            const standardBtn = document.getElementById("StandardSubmitBtn");
+            const razorpayBtn = document.getElementById("RazorpayBtn");
+
+            // Listen for dropdown changes to toggle the UI
+            modeDropdown.addEventListener("change", function () {
+                // Hide everything first
+                upiBox.style.display = "none";
+                standardBtn.style.display = "block";
+                razorpayBtn.style.display = "none";
+
+                if (this.value === "UPI") {
+                    upiBox.style.display = "block"; // Show your custom UPI ID instructions
+                }
+                else if (this.value === "CreditCard") {
+                    standardBtn.style.display = "none"; // Hide standard submit
+                    razorpayBtn.style.display = "block"; // Show Razorpay button
+                }
+            });
+
+            // Handle the Razorpay Checkout Process
+            razorpayBtn.addEventListener("click", function () {
+                var amount = document.getElementById("PaidAmount").value;
+                var billId = document.getElementById("BillId").value;
+
+                if (!amount || amount <= 0) {
+                    alert("Please enter a valid payment amount.");
+                    return;
+                }
+
+                // Call the controller backend to generate the secure Order ID
+                fetch('/Bills/CreateRazorpayOrder?amount=' + amount + '&receiptId=INV-' + billId, {
+                    method: 'POST'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Configure the Razorpay Popup
+                    var options = {
+                        "key": data.key,
+                        "amount": amount * 100,
+                        "currency": "INR",
+                        "name": "City Care Hospital",
+                        "description": "Invoice Payment INV-" + billId,
+                        "order_id": data.orderId,
+                        "handler": function (response) {
+                            // Automatically submit the form to update the database once Razorpay succeeds
+                            alert("Payment Successful! Razorpay ID: " + response.razorpay_payment_id);
+                            document.getElementById("paymentForm").submit();
+                        },
+                        "theme": {
+                            "color": "#198754" // Changed to match your success green theme!
+                        }
+                    };
+                    var rzp = new Razorpay(options);
+                    rzp.open();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("Unable to connect to the payment gateway. Please try again.");
+                });
+            });
+        });
+    </script>
 }
