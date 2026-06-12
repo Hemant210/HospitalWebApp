@@ -9,215 +9,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HospitalManagement</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/HospitalManagement.styles.css" asp-append-version="true" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HospitalManagement</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <li class="nav-item border-top mt-3 pt-2">
-                            <span class="nav-link text-muted fw-bold text-uppercase small">Administration</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="UserManagement" asp-action="Index">User Management</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Departments" asp-action="Index">Departments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Staffs" asp-action="Index">Staff Directory</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Wards" asp-action="Index">Wards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Beds" asp-action="Index">Bed Management</a>
-                        </li>
-                    }
-
-                    @if (User.IsInRole("Admin") || User.IsInRole("Doctor") || User.IsInRole("Nurse") || User.IsInRole("LabTechnician"))
-                    {
-                        <li class="nav-item border-top mt-3 pt-2">
-                            <span class="nav-link text-muted fw-bold text-uppercase small">Clinical</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="MedicalRecords" asp-action="Index">Medical Records</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="LabTests" asp-action="Index">Laboratory</a>
-                        </li>
-                    }
-
-                    @if (User.IsInRole("Admin") || User.IsInRole("Pharmacist") || User.IsInRole("Doctor"))
-                    {
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Medicines" asp-action="Index">Pharmacy / Medicines</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Prescriptions" asp-action="Index">Prescriptions</a>
-                        </li>
-                    }
-
-                    @if (User.IsInRole("Admin") || User.IsInRole("Receptionist"))
-                    {
-                        <li class="nav-item border-top mt-3 pt-2">
-                            <span class="nav-link text-muted fw-bold text-uppercase small">Front Desk</span>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Patients" asp-action="Index">Patients</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Appointments" asp-action="Index">Appointments</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Admissions" asp-action="Index">Admissions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-controller="Bills" asp-action="Index">Billing & Invoices</a>
-                        </li>
-                    }
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    @using HospitalManagement.Auth
-
-    <!-- Only Admin sees User Management -->
-    @if (User.IsInRole(HospitalRoles.Admin))
-    {
-        <li class="nav-item">
-            <a class="nav-link-s" asp-controller="Account" asp-action="UserList">
-                <div class="nav-icon"><i class="fa-solid fa-users-gear"></i></div>
-                <span class="nav-text">User Management</span>
-            </a>
-        </li>
-    }
-
-    <!-- Only Admin sees Wards/Beds -->
-    @if (User.IsInRole(HospitalRoles.Admin))
-    {
-        <li class="nav-item">
-            <a class="nav-link-s" asp-controller="Wards" asp-action="Index">
-                <div class="nav-icon"><i class="fa-solid fa-hospital"></i></div>
-                <span class="nav-text">Wards</span>
-            </a>
-        </li>
-    }
-
-    <!-- Billing: Admin + Receptionist only -->
-    @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Receptionist))
-    {
-        <li class="nav-item">
-            <a class="nav-link-s" asp-controller="Bills" asp-action="Index">
-                <div class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
-                <span class="nav-text">Billing</span>
-            </a>
-        </li>
-    }
-
-    <!-- Lab Tests: Medical team only -->
-    @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Doctor)
-        || User.IsInRole(HospitalRoles.Nurse) || User.IsInRole(HospitalRoles.LabTechnician))
-    {
-        <li class="nav-item">
-            <a class="nav-link-s" asp-controller="LabTests" asp-action="Index">
-                <div class="nav-icon"><i class="fa-solid fa-flask-vial"></i></div>
-                <span class="nav-text">Lab Tests</span>
-            </a>
-        </li>
-    }
-
-    <!-- Pharmacy: Admin, Doctor, Pharmacist -->
-    @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Doctor)
-        || User.IsInRole(HospitalRoles.Pharmacist))
-    {
-        <li class="nav-item">
-            <a class="nav-link-s" asp-controller="Medicines" asp-action="Index">
-                <div class="nav-icon"><i class="fa-solid fa-pills"></i></div>
-                <span class="nav-text">Medicines</span>
-            </a>
-        </li>
-    }
-
-
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <!-- sidebar footer -->
-    <div class="sidebar-footer">
-        @if (SignInManager.IsSignedIn(User))
-        {
-            var currentUser = await UserManager.GetUserAsync(User);
-            <div class="user-card" data-bs-toggle="dropdown">
-                <div class="user-avatar">
-                    @(currentUser?.FullName?.Length > 0
-                                    ? currentUser.FullName[0].ToString().ToUpper() : "U")
-            </div>
-            <div class="user-info">
-                <strong>@currentUser?.FullName</strong>
-                <span>@currentUser?.Role</span>
-            </div>
-        </div>
-        <form asp-controller="Account" asp-action="Logout" method="post" class="mt-2">
-            @Html.AntiForgeryToken()
-            <button type="submit"
-                    style="width:100%;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.25);
-                           color:#fca5a5;border-radius:9px;padding:9px;font-size:12.5px;
-                           font-weight:600;cursor:pointer;transition:background .15s;">
-                <i class="fa-solid fa-right-from-bracket me-2"></i>Sign Out
-            </button>
-        </form>
-                }
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - HospitalManagement - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html> *@
-
-
-
-@using Microsoft.AspNetCore.Identity
-@using HospitalManagement.Models
-@inject SignInManager<AppUser> SignInManager
-@inject UserManager<AppUser> UserManager
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - HospitalManagement</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -388,6 +179,277 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html> *@
+
+
+@using Microsoft.AspNetCore.Identity
+@using HospitalManagement.Models
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - City Care Hospital</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" />
+
+    <style>
+        /* Base SaaS Theme */
+        body {
+            background-color: #f4f7f6; /* Subtle off-white to make cards pop */
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        /* Elevated Top Navbar */
+        .top-navbar {
+            background-color: #ffffff;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.04);
+            z-index: 1030;
+        }
+
+        /* Clean Sidebar */
+        .sidebar {
+            background-color: #ffffff;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.03);
+            min-height: calc(100vh - 62px);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+        }
+
+            /* Premium Nav Links */
+            .sidebar .nav-link {
+                color: #555b62;
+                font-weight: 600;
+                font-size: 0.95rem;
+                padding: 0.65rem 1rem;
+                margin: 0.2rem 1rem;
+                border-radius: 0.5rem;
+                transition: all 0.2s ease-in-out;
+                display: flex;
+                align-items: center;
+            }
+
+                /* Fixed-width icons for perfect vertical text alignment */
+                .sidebar .nav-link i {
+                    width: 24px;
+                    font-size: 1.1rem;
+                    text-align: center;
+                    margin-right: 12px;
+                    color: #8fa0b3;
+                    transition: all 0.2s ease-in-out;
+                }
+
+                /* Hover & Active States */
+                .sidebar .nav-link:hover, .sidebar .nav-link.active-menu {
+                    background-color: rgba(13, 110, 253, 0.08); /* Soft primary blue */
+                    color: #0d6efd;
+                    transform: translateX(3px); /* Subtle slide effect */
+                }
+
+                    .sidebar .nav-link:hover i, .sidebar .nav-link.active-menu i {
+                        color: #0d6efd;
+                    }
+
+        /* Crisp Section Headers */
+        .sidebar-heading {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            color: #adb5bd;
+            letter-spacing: 0.8px;
+            padding: 1.2rem 1.5rem 0.5rem;
+        }
+
+        /* Floating User Profile Card in Sidebar */
+        .sidebar-user-card {
+            background: #ffffff;
+            border-radius: 0.75rem;
+            margin: auto 1rem 1rem 1rem; /* Pushes it to the bottom */
+            padding: 1rem;
+            border: 1px solid #e9ecef;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        main {
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light top-navbar mb-0 py-2">
+            <div class="container-fluid px-4">
+                <a class="navbar-brand fw-bold text-primary d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+                    <div class="bg-primary text-white rounded p-2 me-2 d-flex align-items-center justify-content-center" style="width:35px; height:35px;">
+                        <i class="fa-solid fa-hospital-user fs-5"></i>
+                    </div>
+                    <span class="fs-4 tracking-tight">City Care Hospital</span>
+                </a>
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <i class="fa-solid fa-bars fs-4 text-dark"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse px-0">
+                <div class="position-sticky pt-2 d-flex flex-column h-100">
+                    <ul class="nav flex-column mb-auto">
+
+                        @using HospitalManagement.Auth
+
+                        @if (User.IsInRole(HospitalRoles.Admin))
+                        {
+                            <div class="sidebar-heading">Administration</div>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="UserManagement" asp-action="Index">
+                                    <i class="fa-solid fa-users-gear"></i> User Management
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Departments" asp-action="Index">
+                                    <i class="fa-solid fa-building"></i> Departments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Staffs" asp-action="Index">
+                                    <i class="fa-solid fa-user-doctor"></i> Staff Directory
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Wards" asp-action="Index">
+                                    <i class="fa-solid fa-hospital"></i> Wards
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Beds" asp-action="Index">
+                                    <i class="fa-solid fa-bed"></i> Bed Management
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Doctors" asp-action="Index">
+                                    <i class="fa-solid fa-user-tie"></i> Doctors Directory
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Doctor) || User.IsInRole(HospitalRoles.Nurse) || User.IsInRole(HospitalRoles.LabTechnician))
+                        {
+                            <div class="sidebar-heading">Clinical System</div>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="MedicalRecords" asp-action="Index">
+                                    <i class="fa-solid fa-notes-medical"></i> Medical Records
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="LabTests" asp-action="Index">
+                                    <i class="fa-solid fa-flask-vial"></i> Laboratory
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Pharmacist) || User.IsInRole(HospitalRoles.Doctor))
+                        {
+                            <div class="sidebar-heading">Pharmacy</div>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Medicines" asp-action="Index">
+                                    <i class="fa-solid fa-pills"></i> Inventory
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Prescriptions" asp-action="Index">
+                                    <i class="fa-solid fa-file-prescription"></i> Prescriptions
+                                </a>
+                            </li>
+                        }
+
+                        @if (User.IsInRole(HospitalRoles.Admin) || User.IsInRole(HospitalRoles.Receptionist))
+                        {
+                            <div class="sidebar-heading">Front Desk</div>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Patients" asp-action="Index">
+                                    <i class="fa-solid fa-users"></i> Patient Registry
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Appointments" asp-action="Index">
+                                    <i class="fa-regular fa-calendar-check"></i> Appointments
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admissions" asp-action="Index">
+                                    <i class="fa-solid fa-procedures"></i> Admissions
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Bills" asp-action="Index">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i> Billing & Invoices
+                                </a>
+                            </li>
+                        }
+                    </ul>
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        var currentUser = await UserManager.GetUserAsync(User);
+                        <div class="sidebar-user-card mt-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 42px; height: 42px; font-size: 1.1rem; font-weight: bold;">
+                                    @(currentUser?.FullName?.Length > 0 ? currentUser.FullName[0].ToString().ToUpper() : "U")
+                                </div>
+                                <div class="text-truncate">
+                                    <strong class="d-block text-dark text-truncate" title="@currentUser?.FullName">@currentUser?.FullName</strong>
+                                    <span class="badge bg-secondary mt-1 px-2 py-1" style="font-size: 0.65rem;">@currentUser?.Role</span>
+                                </div>
+                            </div>
+                            <form asp-controller="Account" asp-action="Logout" method="post" class="m-0">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-light border w-100 btn-sm fw-bold text-danger hover-elevate">
+                                    <i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Sign Out
+                                </button>
+                            </form>
+                        </div>
+                    }
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pb-5">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Get current URL path
+            var currentUrl = window.location.pathname.toLowerCase();
+
+            // Loop through each nav link in the sidebar
+            $('.sidebar .nav-link').each(function () {
+                var linkUrl = $(this).attr('href').toLowerCase();
+
+                // If the URL matches the link, add the 'active-menu' class
+                if (currentUrl.includes(linkUrl) && linkUrl !== "/") {
+                    $(this).addClass('active-menu');
+                }
+            });
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
