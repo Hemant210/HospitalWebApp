@@ -63,8 +63,6 @@
     </div>
 </div> *@
 
-
-
 @{
     ViewData["Title"] = "Dashboard Overview";
 }
@@ -104,13 +102,19 @@
         justify-content: center;
         background-color: rgba(255, 255, 255, 0.2);
     }
+
+    .article-img-placeholder {
+        width: 110px;
+        height: 110px;
+        object-fit: cover;
+    }
 </style>
 
 <div class="container-fluid pt-4 px-4 mb-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="fw-bold text-dark mb-0">Hospital Command Center</h2>
-            <p class="text-muted small mb-0">System Overview & Analytics</p>
+            <p class="text-muted small mb-0">System Overview & Updates</p>
         </div>
         <div>
             <span class="text-muted fw-bold"><i class="fa-regular fa-clock me-1"></i>@DateTime.Now.ToString("dd MMMM yyyy, dddd")</span>
@@ -201,129 +205,91 @@
 
     <div class="row g-4">
         <div class="col-lg-8">
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center border-bottom-0">
-                    <h6 class="m-0 fw-bold text-primary"><i class="fa-solid fa-chart-line me-2"></i>Patient Inflow Analytics (Weekly)</h6>
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 border-bottom-0 d-flex justify-content-between align-items-center">
+                    <h6 class="m-0 fw-bold text-primary"><i class="fa-regular fa-newspaper me-2"></i>Hospital Updates & Health Articles</h6>
+                    <span class="badge bg-primary-subtle text-primary">Latest News</span>
                 </div>
-                <div class="card-body">
-                    <canvas id="patientChart" style="height: 250px; width: 100%;"></canvas>
-                </div>
-            </div>
+                <div class="card-body p-4 pt-0">
 
-            <div class="card shadow-sm border-0">
-                <div class="card-header bg-white py-3 border-bottom-0">
-                    <h6 class="m-0 fw-bold text-dark"><i class="fa-solid fa-list-check me-2"></i>Today's Priority Appointments</h6>
-                </div>
-                <div class="card-body p-0">
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="ps-4">Time</th>
-                                    <th>Patient</th>
-                                    <th>Doctor</th>
-                                    <th class="pe-4 text-end">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="ps-4 fw-bold text-primary">09:00 AM</td>
-                                    <td class="fw-semibold">John Doe</td>
-                                    <td class="text-muted small">Dr. Smith</td>
-                                    <td class="pe-4 text-end"><a href="#" class="btn btn-sm btn-outline-info">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td class="ps-4 fw-bold text-primary">10:30 AM</td>
-                                    <td class="fw-semibold">Jane Roe</td>
-                                    <td class="text-muted small">Dr. Sharma</td>
-                                    <td class="pe-4 text-end"><a href="#" class="btn btn-sm btn-outline-info">View</a></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="4" class="text-center text-muted py-3 small">
-                                        <em>Connect ViewBag.RecentAppointments in Controller to populate real data.</em>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <div class="d-flex mb-4 pb-4 border-bottom">
+                        <div class="flex-shrink-0 bg-light rounded d-flex align-items-center justify-content-center article-img-placeholder border">
+                            <i class="fa-solid fa-heart-pulse text-danger fs-1"></i>
+                        </div>
+                        <div class="ms-3">
+                            <span class="badge bg-danger-subtle text-danger mb-2 px-2 py-1"><i class="fa-solid fa-star me-1"></i>Cardiology</span>
+                            <h5 class="fw-bold mb-1 text-dark">New Advanced Cardiac Care Wing Opens</h5>
+                            <p class="text-muted small mb-2">City Care Hospital is proud to introduce our state-of-the-art cardiovascular imaging and robotic surgery capabilities, drastically reducing recovery times for our patients.</p>
+                            <a href="#" class="text-decoration-none small fw-bold">Read Full Article &rarr;</a>
+                        </div>
                     </div>
+
+                    <div class="d-flex mb-4 pb-4 border-bottom">
+                        <div class="flex-shrink-0 bg-light rounded d-flex align-items-center justify-content-center article-img-placeholder border">
+                            <i class="fa-solid fa-virus-covid text-success fs-1"></i>
+                        </div>
+                        <div class="ms-3">
+                            <span class="badge bg-success-subtle text-success mb-2 px-2 py-1"><i class="fa-solid fa-shield-virus me-1"></i>Public Health</span>
+                            <h5 class="fw-bold mb-1 text-dark">Seasonal Flu Prevention Guidelines</h5>
+                            <p class="text-muted small mb-2">As the seasons change, our Chief Medical Officer outlines the best practices for immunity boosting and when to schedule your family's annual vaccination appointments.</p>
+                            <a href="#" class="text-decoration-none small fw-bold">Read Full Article &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="d-flex">
+                        <div class="flex-shrink-0 bg-light rounded d-flex align-items-center justify-content-center article-img-placeholder border">
+                            <i class="fa-solid fa-staff-snake text-info fs-1"></i>
+                        </div>
+                        <div class="ms-3">
+                            <span class="badge bg-info-subtle text-info-emphasis mb-2 px-2 py-1"><i class="fa-solid fa-award me-1"></i>Milestone</span>
+                            <h5 class="fw-bold mb-1 text-dark">Hospital Achieves Tier-1 Accreditation</h5>
+                            <p class="text-muted small mb-2">Thanks to the tireless work of our dedicated medical staff and administrative team, we have been awarded the highest national standard for patient care and clinical excellence.</p>
+                            <a href="#" class="text-decoration-none small fw-bold">Read Full Article &rarr;</a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
 
         <div class="col-lg-4">
-            <div class="card shadow-sm border-0 mb-4">
-                <div class="card-header bg-white py-3 border-bottom-0">
-                    <h6 class="m-0 fw-bold text-dark"><i class="fa-solid fa-bolt me-2 text-warning"></i>Quick Actions</h6>
+            <div class="card shadow-sm border-0 border-start border-info border-4 h-100">
+                <div class="card-header bg-white py-3 border-bottom pb-2">
+                    <h6 class="m-0 fw-bold text-dark"><i class="fa-solid fa-user-doctor me-2 text-info"></i>On-Duty Specialists</h6>
+                    <p class="text-muted small mb-0 mt-1">Leading practitioners available today.</p>
                 </div>
-                <div class="card-body p-3">
-                    <div class="d-grid gap-2">
-                        <a asp-controller="Patients" asp-action="Create" class="btn btn-outline-primary text-start fw-bold p-3">
-                            <i class="fa-solid fa-user-plus me-2 fs-5 align-middle"></i> Register New Patient
-                        </a>
-                        <a asp-controller="Appointments" asp-action="Create" class="btn btn-outline-success text-start fw-bold p-3">
-                            <i class="fa-solid fa-calendar-plus me-2 fs-5 align-middle"></i> Book Appointment
-                        </a>
-                        <a asp-controller="Admissions" asp-action="Create" class="btn btn-outline-danger text-start fw-bold p-3">
-                            <i class="fa-solid fa-bed-pulse me-2 fs-5 align-middle"></i> Admit to Hospital
-                        </a>
-                        <a asp-controller="Bills" asp-action="Index" class="btn btn-outline-dark text-start fw-bold p-3">
-                            <i class="fa-solid fa-file-invoice-dollar me-2 fs-5 align-middle"></i> Generate Invoice
-                        </a>
-                    </div>
-                </div>
-            </div>
+                <div class="list-group list-group-flush">
+                    @if (ViewBag.AvailableDoctors != null && ((IEnumerable<HospitalManagement.Models.Doctor>)ViewBag.AvailableDoctors).Any())
+                    {
+                        foreach (var doctor in (IEnumerable<HospitalManagement.Models.Doctor>)ViewBag.AvailableDoctors)
+                        {
+                            <div class="list-group-item px-4 py-3 d-flex align-items-center">
+                                <div class="bg-light border text-primary rounded-circle d-flex align-items-center justify-content-center me-3 flex-shrink-0" style="width: 45px; height: 45px;">
+                                    <i class="fa-solid fa-user-md fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Dr. @doctor.FirstName @doctor.LastName</h6>
+                                    <div class="d-flex align-items-center gap-2 mt-1">
+                                        <span class="badge bg-info-subtle text-info-emphasis px-2 py-1" style="font-size: 0.7rem;">@doctor.Specialization</span>
+                                        <small class="text-muted" style="font-size: 0.75rem;"><i class="fa-solid fa-building me-1"></i>@(doctor.Department?.DeptName ?? "General")</small>
+                                    </div>
+                                </div>
+                            </div>
+                        }
 
-            <div class="card shadow-sm border-0 border-start border-warning border-4">
-                <div class="card-body p-4">
-                    <h6 class="fw-bold text-warning-emphasis mb-3"><i class="fa-solid fa-bell me-2"></i>System Notices</h6>
-                    <div class="d-flex align-items-start mb-3 border-bottom pb-3">
-                        <i class="fa-solid fa-capsules text-danger mt-1 me-2"></i>
-                        <div>
-                            <p class="mb-0 fw-bold small">Low Pharmacy Stock</p>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">3 medications are currently below minimum thresholds.</p>
+                        <div class="card-body p-3 text-center bg-light mt-auto border-top">
+                            <a asp-controller="Doctors" asp-action="Index" class="btn btn-sm btn-outline-info fw-bold w-100">View Full Directory</a>
                         </div>
-                    </div>
-                    <div class="d-flex align-items-start">
-                        <i class="fa-solid fa-server text-success mt-1 me-2"></i>
-                        <div>
-                            <p class="mb-0 fw-bold small">System Status</p>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">All databases running optimally. Last backup 2 hrs ago.</p>
+                    }
+                    else
+                    {
+                        <div class="p-4 text-center text-muted">
+                            <i class="fa-solid fa-user-slash fs-2 mb-2 text-light"></i>
+                            <p class="mb-0 small">No specialist data found in the directory.</p>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Dummy data for the chart - you can hook this up to real backend data later!
-        var ctx = document.getElementById('patientChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                datasets: [{
-                    label: 'New Admissions',
-                    data: [12, 19, 15, 25, 22, 10, 8],
-                    backgroundColor: 'rgba(78, 115, 223, 0.1)',
-                    borderColor: 'rgba(78, 115, 223, 1)',
-                    borderWidth: 3,
-                    tension: 0.3,
-                    fill: true
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false }
-                },
-                scales: {
-                    y: { beginAtZero: true }
-                }
-            }
-        });
-    </script>
-}

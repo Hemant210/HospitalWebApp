@@ -34,6 +34,13 @@ namespace HospitalManagement.Controllers
             ViewBag.PendingLabs = await _context.LabTests
                 .CountAsync(l => l.Status == LabTestStatus.Pending);
 
+            // 5. NEW: Fetch 5 Doctors for the "Available Specialists" widget
+            ViewBag.AvailableDoctors = await _context.Doctors
+                .Include(d => d.Department)
+                .Take(5)
+                .AsNoTracking()
+                .ToListAsync();
+
             return View();
         }
 
