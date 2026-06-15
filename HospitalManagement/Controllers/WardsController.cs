@@ -156,5 +156,74 @@ namespace HospitalManagement.Controllers
         {
             return _context.Wards.Any(e => e.WardId == id);
         }
+
+        // ---------------------------------------------------
+        // 📱 iOS API ENDPOINTS (FULL CRUD)
+        // ---------------------------------------------------
+
+        public class ApiWardDto
+        {
+            public int WardId { get; set; }
+            public string WardName { get; set; } = string.Empty;
+            public string? WardType { get; set; }
+            public int TotalBeds { get; set; }
+        }
+
+        [HttpGet("/api/wards")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetWardsApi()
+        {
+            var wards = await _context.Wards
+                .Select(w => new ApiWardDto
+                {
+                    WardId = w.WardId,
+                    WardName = w.WardName,
+                    WardType = w.WardType,
+                    TotalBeds = w.TotalBeds
+                }).AsNoTracking().ToListAsync();
+            return Ok(wards);
+        }
+
+        [HttpPost("/api/wards")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateWardApi([FromBody] ApiWardDto dto)
+        {
+            var ward = new Ward
+            {
+                WardName = dto.WardName,
+                WardType = dto.WardType,
+                TotalBeds = dto.TotalBeds
+            };
+            _context.Wards.Add(ward);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpPut("/api/wards/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateWardApi(int id, [FromBody] ApiWardDto dto)
+        {
+            var ward = await _context.Wards.FindAsync(id);
+            if (ward == null) return NotFound();
+
+            ward.WardName = dto.WardName;
+            ward.WardType = dto.WardType;
+            ward.TotalBeds = dto.TotalBeds;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("/api/wards/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteWardApi(int id)
+        {
+            var ward = await _context.Wards.FindAsync(id);
+            if (ward == null) return NotFound();
+
+            _context.Wards.Remove(ward);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
     }
 }

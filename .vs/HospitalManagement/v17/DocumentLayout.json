@@ -3,6 +3,58 @@
   "WorkspaceRootPath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\doctorscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\models\\doctor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\bedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\bedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\models\\bed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\models\\bed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\wardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\wardscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\models\\ward.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\api\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\api\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\views\\bills\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\views\\bills\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -19,16 +71,8 @@
       "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\views\\medicalrecords\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\medicalrecordscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\digit\\desktop\\exam\\msc ict 2\\projectc#\\hospitalwebapp\\hospitalmanagement\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -70,7 +114,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -78,20 +122,152 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LabTestsController.cs",
-              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
-              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\LabTestsController.cs",
-              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
-              "RelativeToolTip": "HospitalManagement\\Controllers\\LabTestsController.cs",
-              "ViewState": "AgIAAKoAAAAAAAAAAAAkwMAAAAABAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "DoctorsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\DoctorsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\DoctorsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\DoctorsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\DoctorsController.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAmwOkAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T19:29:19.392Z",
+              "WhenOpened": "2026-06-15T07:15:02.09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WardsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\WardsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\WardsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\WardsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\WardsController.cs",
+              "ViewState": "AgIAANYAAAAAAAAAAAAUwOIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T06:50:06.515Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicalRecordsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\MedicalRecordsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\MedicalRecordsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\MedicalRecordsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\MedicalRecordsController.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAqwBUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T19:23:40.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BedsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BedsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\BedsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BedsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\BedsController.cs",
+              "ViewState": "AgIAAOMAAAAAAAAAAAAcwO0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T07:01:49.645Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Doctor.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Doctor.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Models\\Doctor.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Doctor.cs",
+              "RelativeToolTip": "HospitalManagement\\Models\\Doctor.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAswB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T07:15:30.343Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Ward.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Ward.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Models\\Ward.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Ward.cs",
+              "RelativeToolTip": "HospitalManagement\\Models\\Ward.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAADwvxUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T06:49:44.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Department.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Models\\Department.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Department.cs",
+              "RelativeToolTip": "HospitalManagement\\Models\\Department.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA/wBQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T06:34:15.579Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Program.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Program.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Program.cs",
+              "RelativeToolTip": "HospitalManagement\\Program.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAAAAAE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T06:12:30.018Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 5,
+              "Title": "Bed.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Bed.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Models\\Bed.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Bed.cs",
+              "RelativeToolTip": "HospitalManagement\\Models\\Bed.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T07:02:10.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DepartmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\DepartmentsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\DepartmentsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\DepartmentsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\DepartmentsController.cs",
+              "ViewState": "AgIAAN8AAAAAAAAAAAAUwOsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T06:32:13.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Authcontroller.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\API\\Authcontroller.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\API\\Authcontroller.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\API\\Authcontroller.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\API\\Authcontroller.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-15T05:58:48.334Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HospitalManagement\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HospitalManagement\\Properties\\launchSettings.json",
+              "ViewState": "AgIAACIAAAAAAAAAAAAUwC0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-15T05:23:19.635Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Shared\\_Layout.cshtml",
@@ -103,7 +279,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 18,
               "Title": "Login.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Account\\Login.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Account\\Login.cshtml",
@@ -115,57 +291,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BillsController.cs",
-              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BillsController.cs",
-              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\BillsController.cs",
-              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BillsController.cs",
-              "RelativeToolTip": "HospitalManagement\\Controllers\\BillsController.cs",
-              "ViewState": "AgIAAAsBAAAAAAAAAAAAAPoAAAAwAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-10T20:30:31.735Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Edit.cshtml",
-              "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Edit.cshtml",
-              "RelativeToolTip": "HospitalManagement\\Views\\Bills\\Edit.cshtml",
-              "ViewState": "AgIAAC0AAAAAAAAAAAAcwOsAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-10T20:34:37.628Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
-              "RelativeDocumentMoniker": "HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
-              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
-              "RelativeToolTip": "HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAkwEwAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-06-12T19:23:18.779Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MedicalRecordsController.cs",
-              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\MedicalRecordsController.cs",
-              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\MedicalRecordsController.cs",
-              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\MedicalRecordsController.cs",
-              "RelativeToolTip": "HospitalManagement\\Controllers\\MedicalRecordsController.cs",
-              "ViewState": "AgIAAK4AAAAAAAAAAAAkwL4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-12T19:23:40.275Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "AccountController.cs",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\AccountController.cs",
               "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\AccountController.cs",
@@ -177,7 +303,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
+              "Title": "LabTestsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\LabTestsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\LabTestsController.cs",
+              "ViewState": "AgIAAKoAAAAAAAAAAAAkwMAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T19:29:19.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "BillsController.cs",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BillsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\BillsController.cs",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\BillsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\BillsController.cs",
+              "ViewState": "AgIAAAsBAAAAAAAAAAAAAPoAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T20:30:31.735Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Edit.cshtml",
+              "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Edit.cshtml",
+              "RelativeToolTip": "HospitalManagement\\Views\\Bills\\Edit.cshtml",
+              "ViewState": "AgIAAOsAAAAAAAAAAAAAADoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-10T20:34:37.628Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
+              "RelativeDocumentMoniker": "HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
+              "ToolTip": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
+              "RelativeToolTip": "HospitalManagement\\Views\\MedicalRecords\\Create.cshtml",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwEwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-12T19:23:18.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "HomeController.cs",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\HomeController.cs",
@@ -189,7 +363,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 19,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Home\\Index.cshtml",
@@ -201,7 +375,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 22,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Details.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Details.cshtml",
@@ -213,7 +387,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 24,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Index.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Index.cshtml",
@@ -225,7 +399,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 23,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Create.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Create.cshtml",
@@ -237,7 +411,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 21,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Views\\Bills\\Delete.cshtml",
               "RelativeDocumentMoniker": "HospitalManagement\\Views\\Bills\\Delete.cshtml",
@@ -249,7 +423,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 25,
               "Title": "Bill.cs",
               "DocumentMoniker": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\Models\\Bill.cs",
               "RelativeDocumentMoniker": "HospitalManagement\\Models\\Bill.cs",

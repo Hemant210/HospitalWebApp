@@ -148,5 +148,89 @@ namespace HospitalManagement.Controllers
         {
             return _context.Doctors.Any(e => e.DoctorId == id);
         }
+
+        // ---------------------------------------------------
+        // 📱 iOS API ENDPOINTS (FULL CRUD)
+        // ---------------------------------------------------
+
+        public class ApiDoctorDto
+        {
+            public int DoctorId { get; set; }
+            public string FirstName { get; set; } = string.Empty;
+            public string LastName { get; set; } = string.Empty;
+            public string? Specialization { get; set; }
+            public string? Phone { get; set; }
+            public string? Email { get; set; }
+            public int DepartmentId { get; set; }
+            public string? DepartmentName { get; set; } // Sent to iOS for display
+        }
+
+        [HttpGet("/api/doctors")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetDoctorsApi()
+        {
+            var doctors = await _context.Doctors
+                .Include(d => d.Department)
+                .Select(d => new ApiDoctorDto
+                {
+                    DoctorId = d.DoctorId,
+                    FirstName = d.FirstName,
+                    LastName = d.LastName,
+                    Specialization = d.Specialization,
+                    Phone = d.Phone,
+                    Email = d.Email,
+                    DepartmentId = d.DepartmentId,
+                    DepartmentName = d.Department.DeptName
+                }).AsNoTracking().ToListAsync();
+            return Ok(doctors);
+        }
+
+        [HttpPost("/api/doctors")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateDoctorApi([FromBody] ApiDoctorDto dto)
+        {
+            var doctor = new Doctor
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Specialization = dto.Specialization,
+                Phone = dto.Phone,
+                Email = dto.Email,
+                DepartmentId = dto.DepartmentId
+            };
+            _context.Doctors.Add(doctor);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpPut("/api/doctors/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateDoctorApi(int id, [FromBody] ApiDoctorDto dto)
+        {
+            var doctor = await _context.Doctors.FindAsync(id);
+            if (doctor == null) return NotFound();
+
+            doctor.FirstName = dto.FirstName;
+            doctor.LastName = dto.LastName;
+            doctor.Specialization = dto.Specialization;
+            doctor.Phone = dto.Phone;
+            doctor.Email = dto.Email;
+            doctor.DepartmentId = dto.DepartmentId;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("/api/doctors/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteDoctorApi(int id)
+        {
+            var doctor = await _context.Doctors.FindAsync(id);
+            if (doctor == null) return NotFound();
+
+            _context.Doctors.Remove(doctor);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
     }
 }

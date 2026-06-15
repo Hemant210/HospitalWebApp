@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "ContainingType": "HospitalManagement.Controllers.Api.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "model",
+        "Type": "HospitalManagement.Controllers.Api.AuthController\u002BApiLoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

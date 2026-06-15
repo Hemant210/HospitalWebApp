@@ -187,5 +187,109 @@ namespace HospitalManagement.Controllers
         {
             return _context.MedicalRecords.Any(e => e.RecordId == id);
         }
+        // ---------------------------------------------------
+        // 📱 iOS API ENDPOINTS (FULL CRUD)
+        // ---------------------------------------------------
+
+        public class ApiMedicalRecordDto
+        {
+            public int RecordId { get; set; }
+            public int PatientId { get; set; }
+            public string? PatientName { get; set; }
+            public int DoctorId { get; set; }
+            public string? DoctorName { get; set; }
+            public DateTime VisitDate { get; set; }
+            public string? Diagnosis { get; set; }
+            public string? Vitals { get; set; }
+            public string? Notes { get; set; }
+        }
+
+        [HttpGet("/api/medicalrecords")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetMedicalRecordsApi()
+        {
+            var records = await _context.MedicalRecords
+                .Include(m => m.Patient)
+                .Include(m => m.Doctor)
+                .Select(m => new ApiMedicalRecordDto
+                {
+                    RecordId = m.RecordId,
+                    PatientId = m.PatientId,
+                    PatientName = m.Patient.FirstName + " " + m.Patient.LastName,
+                    DoctorId = m.DoctorId,
+                    DoctorName = "Dr. " + m.Doctor.FirstName + " " + m.Doctor.LastName,
+                    VisitDate = m.VisitDate,
+                    Diagnosis = m.Diagnosis,
+                    Vitals = m.Vitals,
+                    Notes = m.Notes
+                })
+                .OrderByDescending(m => m.VisitDate)
+                .AsNoTracking().ToListAsync();
+            return Ok(records);
+        }
+
+        // 🧠 SMART DROPDOWN API FOR iOS
+        [HttpGet("/api/medicalrecords/options")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetOptionsApi()
+        {
+            var doctors = await _context.Doctors.Select(d => new { id = d.DoctorId, name = $"Dr. {d.FirstName} {d.LastName}" }).ToListAsync();
+
+            var today = DateTime.Today;
+            var activePatients = await _context.Patients
+                .Where(p => p.Admissions.Any(a => a.DischargeDate == null) || p.Appointments.Any(a => a.AppointmentDate.Date >= today))
+                .Select(p => new { id = p.PatientId, name = $"{p.FirstName} {p.LastName} (ID: #{p.PatientId})" })
+                .ToListAsync();
+
+            return Ok(new { doctors, patients = activePatients });
+        }
+
+        [HttpPost("/api/medicalrecords")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateRecordApi([FromBody] ApiMedicalRecordDto dto)
+        {
+            var record = new MedicalRecord
+            {
+                PatientId = dto.PatientId,
+                DoctorId = dto.DoctorId,
+                VisitDate = dto.VisitDate,
+                Diagnosis = dto.Diagnosis,
+                Vitals = dto.Vitals,
+                Notes = dto.Notes
+            };
+            _context.MedicalRecords.Add(record);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpPut("/api/medicalrecords/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateRecordApi(int id, [FromBody] ApiMedicalRecordDto dto)
+        {
+            var record = await _context.MedicalRecords.FindAsync(id);
+            if (record == null) return NotFound();
+
+            record.PatientId = dto.PatientId;
+            record.DoctorId = dto.DoctorId;
+            record.VisitDate = dto.VisitDate;
+            record.Diagnosis = dto.Diagnosis;
+            record.Vitals = dto.Vitals;
+            record.Notes = dto.Notes;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("/api/medicalrecords/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteRecordApi(int id)
+        {
+            var record = await _context.MedicalRecords.FindAsync(id);
+            if (record == null) return NotFound();
+
+            _context.MedicalRecords.Remove(record);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
     }
 }

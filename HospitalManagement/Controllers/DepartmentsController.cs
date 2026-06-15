@@ -175,5 +175,65 @@ namespace HospitalManagement.Controllers
         {
             return _context.Departments.Any(e => e.DepartmentId == id);
         }
+        // ---------------------------------------------------
+        // 📱 iOS API ENDPOINTS (FULL CRUD)
+        // ---------------------------------------------------
+
+        public class ApiDepartmentDto
+        {
+            public int DepartmentId { get; set; }
+            public string DeptName { get; set; } = string.Empty;
+            public string? Location { get; set; }
+        }
+
+        [HttpGet("/api/departments")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetDepartmentsApi()
+        {
+            var departments = await _context.Departments
+                .Select(d => new ApiDepartmentDto
+                {
+                    DepartmentId = d.DepartmentId,
+                    DeptName = d.DeptName,
+                    Location = d.Location
+                }).AsNoTracking().ToListAsync();
+            return Ok(departments);
+        }
+
+        [HttpPost("/api/departments")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateDepartmentApi([FromBody] ApiDepartmentDto dto)
+        {
+            var dept = new Department { DeptName = dto.DeptName, Location = dto.Location };
+            _context.Departments.Add(dept);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpPut("/api/departments/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateDepartmentApi(int id, [FromBody] ApiDepartmentDto dto)
+        {
+            var dept = await _context.Departments.FindAsync(id);
+            if (dept == null) return NotFound();
+
+            dept.DeptName = dto.DeptName;
+            dept.Location = dto.Location;
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("/api/departments/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteDepartmentApi(int id)
+        {
+            var dept = await _context.Departments.FindAsync(id);
+            if (dept == null) return NotFound();
+
+            _context.Departments.Remove(dept);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
     }
+
 }

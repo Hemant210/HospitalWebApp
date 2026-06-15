@@ -163,5 +163,81 @@ namespace HospitalManagement.Controllers
         {
             return _context.Beds.Any(e => e.BedId == id);
         }
+
+        // ---------------------------------------------------
+        // 📱 iOS API ENDPOINTS (FULL CRUD)
+        // ---------------------------------------------------
+
+        public class ApiBedDto
+        {
+            public int BedId { get; set; }
+            public int WardId { get; set; }
+            public string? WardName { get; set; } // Sent to iOS for display
+            public string? BedNumber { get; set; }
+            public decimal PricePerDay { get; set; }
+            public int Status { get; set; } // 0=Available, 1=Occupied, 2=Maintenance
+        }
+
+        [HttpGet("/api/beds")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBedsApi()
+        {
+            var beds = await _context.Beds
+                .Include(b => b.Ward)
+                .Select(b => new ApiBedDto
+                {
+                    BedId = b.BedId,
+                    WardId = b.WardId,
+                    WardName = b.Ward.WardName,
+                    BedNumber = b.BedNumber,
+                    PricePerDay = b.PricePerDay,
+                    Status = (int)b.Status
+                }).AsNoTracking().ToListAsync();
+            return Ok(beds);
+        }
+
+        [HttpPost("/api/beds")]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateBedApi([FromBody] ApiBedDto dto)
+        {
+            var bed = new Bed
+            {
+                WardId = dto.WardId,
+                BedNumber = dto.BedNumber,
+                PricePerDay = dto.PricePerDay,
+                Status = (BedStatus)dto.Status
+            };
+            _context.Beds.Add(bed);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpPut("/api/beds/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateBedApi(int id, [FromBody] ApiBedDto dto)
+        {
+            var bed = await _context.Beds.FindAsync(id);
+            if (bed == null) return NotFound();
+
+            bed.WardId = dto.WardId;
+            bed.BedNumber = dto.BedNumber;
+            bed.PricePerDay = dto.PricePerDay;
+            bed.Status = (BedStatus)dto.Status;
+
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
+
+        [HttpDelete("/api/beds/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> DeleteBedApi(int id)
+        {
+            var bed = await _context.Beds.FindAsync(id);
+            if (bed == null) return NotFound();
+
+            _context.Beds.Remove(bed);
+            await _context.SaveChangesAsync();
+            return Ok(new { success = true });
+        }
     }
 }
