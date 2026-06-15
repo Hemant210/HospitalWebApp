@@ -2,12 +2,13 @@
 
 namespace HospitalManagement.ViewModels
 {
+   
     // ── LOGIN ──────────────────────────────────────────────────────────
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Enter a valid email")]
-        public string Email { get; set; } = string.Empty;
+        [Required(ErrorMessage = "Email or Phone Number is required")]
+        [Display(Name = "Email or Phone Number")]
+        public string EmailOrPhone { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]

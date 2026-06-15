@@ -1,0 +1,64 @@
+﻿@model IEnumerable<HospitalManagement.Models.LabTest>
+@{
+    ViewData["Title"] = "My Lab Reports";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <h3 class="fw-bold mb-4"><i class="fa-solid fa-flask text-primary me-2"></i>Laboratory Reports</h3>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3">Date Ordered</th>
+                            <th class="py-3">Test Name</th>
+                            <th class="py-3">Ordered By</th>
+                            <th class="py-3">Status</th>
+                            <th class="pe-4 py-3">Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold">@item.TestDate.ToString("dd MMM yyyy")</td>
+                                <td class="text-primary fw-semibold">@item.TestName</td>
+                                <td>Dr. @item.MedicalRecord?.Doctor?.LastName</td>
+                                <td>
+                                    @if (item.Status == HospitalManagement.Models.LabTestStatus.Completed)
+                                    {
+                                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1"><i class="fa-solid fa-check-double me-1"></i>Completed</span>
+                                    }
+                                    else if (item.Status == HospitalManagement.Models.LabTestStatus.Pending)
+                                    {
+                                        <span class="badge bg-warning-subtle text-warning-emphasis border border-warning-subtle px-2 py-1"><i class="fa-solid fa-clock me-1"></i>Pending</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-info-subtle text-info-emphasis border border-info-subtle px-2 py-1"><i class="fa-solid fa-spinner fa-spin me-1"></i>Processing</span>
+                                    }
+                                </td>
+                                <td class="pe-4">
+                                    @if (item.Status == HospitalManagement.Models.LabTestStatus.Completed)
+                                    {
+                                        <span class="text-dark">@item.Result</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted fst-italic">Awaiting analysis...</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                        @if (!Model.Any())
+                        {
+                            <tr><td colspan="5" class="text-center py-4 text-muted">No laboratory reports found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

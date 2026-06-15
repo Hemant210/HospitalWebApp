@@ -71,12 +71,18 @@
                                 </td>
                                 <td class="pe-4 text-end">
                                     <div class="btn-group" role="group">
-                                        <a asp-action="Edit" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-primary" title="Update Results">
-                                            <i class="fa-solid fa-file-pen"></i> Results
-                                        </a>
+
+                                        @if (!User.IsInRole("Doctor"))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-primary" title="Update Results">
+                                                <i class="fa-solid fa-file-pen"></i> Results
+                                            </a>
+                                        }
+
                                         <a asp-action="Details" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-info" title="View Details">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
+
                                         @if (User.IsInRole(HospitalRoles.Admin))
                                         {
                                             <a asp-action="Delete" asp-route-id="@item.TestId" class="btn btn-sm btn-outline-danger">

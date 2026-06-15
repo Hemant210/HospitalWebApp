@@ -1,4 +1,4 @@
-﻿@model HospitalManagement.Models.Bill
+﻿@* @model HospitalManagement.Models.Bill
 
 @{
     ViewData["Title"] = "Generate Invoice";
@@ -110,4 +110,165 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+} *@
+
+
+
+@model HospitalManagement.Models.Bill
+
+@{
+    ViewData["Title"] = "Generate Invoice";
+}
+
+<div class="container mt-4 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="card shadow-sm border-0 border-top border-primary border-4">
+                <div class="card-header bg-white py-3">
+                    <h4 class="mb-0 fw-bold text-dark"><i class="fa-solid fa-file-invoice-dollar text-primary me-2"></i>Review & Generate Bill</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <input type="hidden" asp-for="PatientId" />
+                        <input type="hidden" asp-for="AdmissionId" />
+                        <input type="hidden" asp-for="AppointmentId" />
+
+                        <div class="row bg-light p-3 rounded mb-4 border mx-0">
+                            <div class="col-md-6 mb-2 mb-md-0 border-end">
+                                <span class="d-block small text-muted text-uppercase fw-bold">Billed To Patient ID:</span>
+                                <span class="fs-5 fw-bold text-primary">#@Model.PatientId</span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="d-block small text-muted text-uppercase fw-bold">Admission Context ID:</span>
+                                <span class="fs-5 fw-bold text-dark">@(Model.AdmissionId?.ToString() ?? "N/A")</span>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted fw-bold text-uppercase border-bottom pb-2 mb-3">System Generated Line Items (Read-Only)</h6>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DoctorFee" class="control-label fw-bold small text-secondary">Consultation Fee</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="DoctorFee" class="form-control bg-light text-muted fw-bold" type="number" step="0.01" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RoomCharges" class="control-label fw-bold small text-secondary">Inpatient Bed Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="RoomCharges" class="form-control bg-light text-muted fw-bold" type="number" step="0.01" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="LabCharges" class="control-label fw-bold small text-secondary">Diagnostic Lab Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="LabCharges" class="form-control bg-light text-muted fw-bold" type="number" step="0.01" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MedicineCharges" class="control-label fw-bold small text-secondary">Pharmacy Charges</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">₹</span>
+                                    <input asp-for="MedicineCharges" class="form-control bg-light text-muted fw-bold" type="number" step="0.01" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4 mt-2">
+                            <div class="col-12 text-end bg-light p-3 rounded border">
+                                <h6 class="text-muted mb-1">Subtotal: ₹<span id="subtotalDisplay">0.00</span></h6>
+                                <h4 class="fw-bold text-primary mb-0 border-top border-secondary pt-2 mt-2">Net Total: ₹<span id="netTotalDisplay">0.00</span></h4>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted fw-bold text-uppercase border-bottom pb-2 mt-3 mb-3">Settlement & Adjustments</h6>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Discount" class="control-label fw-bold text-success small">Apply Courtesy Discount</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-success text-white">₹</span>
+                                    <input asp-for="Discount" class="form-control border-success fw-bold" type="number" step="0.01" />
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PaidAmount" class="control-label fw-bold text-primary small">Initial Payment Received</label>
+                                <div class="input-group">
+                                    <span class="input-group-text bg-primary text-white">₹</span>
+                                    <input asp-for="PaidAmount" class="form-control border-primary fw-bold" type="number" step="0.01" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PaymentMode" class="control-label fw-bold small">Payment Method</label>
+                                <select asp-for="PaymentMode" class="form-select" asp-items="Html.GetEnumSelectList<HospitalManagement.Models.PaymentMode>()">
+                                    <option value="">-- Select Transfer Mode --</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label asp-for="BillDate" class="control-label fw-bold small">Ledger Date</label>
+                                <input asp-for="BillDate" class="form-control bg-light" readonly tabindex="-1" />
+                            </div>
+                        </div>
+
+                        <div class="d-grid mt-2">
+                            <button type="submit" class="btn btn-success fw-bold py-2"><i class="fa-solid fa-file-circle-check me-2"></i>Generate Final Invoice</button>
+                            <a asp-action="Index" class="btn btn-outline-secondary btn-sm mt-2">Cancel Formulation</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get the Read-Only Input Fields
+            const docFee = parseFloat(document.getElementById('DoctorFee').value) || 0;
+            const roomFee = parseFloat(document.getElementById('RoomCharges').value) || 0;
+            const labFee = parseFloat(document.getElementById('LabCharges').value) || 0;
+            const medFee = parseFloat(document.getElementById('MedicineCharges').value) || 0;
+
+            // Calculate Subtotal
+            const subtotal = docFee + roomFee + labFee + medFee;
+            document.getElementById('subtotalDisplay').innerText = subtotal.toFixed(2);
+
+            // Get Interactive Elements
+            const discountInput = document.getElementById('Discount');
+            const netTotalDisplay = document.getElementById('netTotalDisplay');
+
+            // Function to update the Net Total dynamically
+            function calculateNetTotal() {
+                let discount = parseFloat(discountInput.value) || 0;
+
+                // Prevent front desk from entering a discount larger than the bill
+                if (discount > subtotal) {
+                    discount = subtotal;
+                    discountInput.value = discount.toFixed(2);
+                }
+
+                const netTotal = subtotal - discount;
+                netTotalDisplay.innerText = netTotal.toFixed(2);
+            }
+
+            // Listen for typing in the discount box
+            discountInput.addEventListener('input', calculateNetTotal);
+
+            // Run calculation on initial load
+            calculateNetTotal();
+        });
+    </script>
 }

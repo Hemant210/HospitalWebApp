@@ -132,10 +132,10 @@
                     <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded border-danger border-start border-4 small py-2"></div>
 
-                        <div class="form-floating mb-3 shadow-sm">
-                            <input asp-for="Email" class="form-control" id="floatingInput" placeholder="name@hospital.com" />
-                            <label for="floatingInput"><i class="fa-solid fa-envelope text-muted me-2"></i>Email Address</label>
-                            <span asp-validation-for="Email" class="text-danger small fw-bold"></span>
+                        <div class="form-floating mb-3">
+                            <input asp-for="EmailOrPhone" class="form-control" id="floatingInput" placeholder="name@example.com or 9998887777" />
+                            <label asp-for="EmailOrPhone">Email address or Phone Number</label>
+                            <span asp-validation-for="EmailOrPhone" class="text-danger fs-7"></span>
                         </div>
 
                         <div class="form-floating mb-3 shadow-sm">
