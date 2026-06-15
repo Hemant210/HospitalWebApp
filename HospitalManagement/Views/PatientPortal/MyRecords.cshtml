@@ -1,0 +1,40 @@
+﻿@model IEnumerable<HospitalManagement.Models.MedicalRecord>
+@{
+    ViewData["Title"] = "My Medical Records";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <h3 class="fw-bold mb-4"><i class="fa-solid fa-notes-medical text-primary me-2"></i>My Medical History</h3>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4 py-3">Date</th>
+                            <th class="py-3">Attending Doctor</th>
+                            <th class="py-3">Primary Diagnosis</th>
+                            <th class="py-3">Vitals Recorded</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="ps-4 fw-bold text-primary">@item.VisitDate.ToString("dd MMM yyyy")</td>
+                                <td>Dr. @item.Doctor?.FirstName @item.Doctor?.LastName</td>
+                                <td>@item.Diagnosis</td>
+                                <td class="text-muted">@item.Vitals</td>
+                            </tr>
+                        }
+                        @if (!Model.Any())
+                        {
+                            <tr><td colspan="4" class="text-center py-4 text-muted">No medical records found.</td></tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

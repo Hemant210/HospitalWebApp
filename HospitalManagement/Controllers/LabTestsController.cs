@@ -91,6 +91,8 @@ namespace HospitalManagement.Controllers
         }
 
         // GET: LabTests/Edit/5
+        // 🚨 SECURITY FIX: Override the class-level auth to exclude Doctors
+        [Authorize(Roles = "Admin, LabTechnician")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -102,9 +104,10 @@ namespace HospitalManagement.Controllers
             return View(labTest);
         }
 
-        // POST: LabTests/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // 🚨 SECURITY FIX: Apply the same strict auth to the POST method
+        [Authorize(Roles = "Admin, LabTechnician")]
         public async Task<IActionResult> Edit(int id, [Bind("TestId,RecordId,PatientId,TechnicianId,TestName,Cost,Result,TestDate,Status")] LabTest labTest)
         {
             if (id != labTest.TestId) return NotFound();

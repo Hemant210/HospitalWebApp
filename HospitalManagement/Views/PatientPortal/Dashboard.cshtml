@@ -1,0 +1,51 @@
+﻿@model HospitalManagement.Models.Patient
+@{
+    ViewData["Title"] = "Patient Dashboard";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="fw-bold">Welcome back, @Model.FirstName!</h2>
+            <p class="text-muted">Here is an overview of your health profile and recent activity.</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-sm-6 col-xl-4">
+            <div class="card bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm border-0 h-100">
+                <i class="fa-solid fa-notes-medical fa-3x text-primary"></i>
+                <div class="ms-3 text-end">
+                    <p class="mb-2 text-muted">Clinical Visits</p>
+                    <h4 class="mb-0 text-dark fw-bold">@ViewBag.TotalVisits</h4>
+                </div>
+                <a asp-action="MyRecords" class="stretched-link"></a>
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-xl-4">
+            <div class="card bg-light rounded d-flex align-items-center justify-content-between p-4 shadow-sm border-0 h-100">
+                <i class="fa-solid fa-file-invoice-dollar fa-3x text-danger"></i>
+                <div class="ms-3 text-end">
+                    <p class="mb-2 text-muted">Pending Invoices</p>
+                    <h4 class="mb-0 text-dark fw-bold">@ViewBag.UnpaidBillsCount</h4>
+                </div>
+                <a asp-action="MyBills" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-white py-3">
+            <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user me-2 text-primary"></i>My Profile Information</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 mb-3"><strong>Full Name:</strong> @Model.FirstName @Model.LastName</div>
+                <div class="col-md-6 mb-3"><strong>Phone:</strong> @Model.Phone</div>
+                <div class="col-md-6 mb-3"><strong>Email:</strong> @Model.Email</div>
+                <div class="col-md-6 mb-3"><strong>Blood Group:</strong> <span class="badge bg-danger">@Model.BloodGroup</span></div>
+            </div>
+        </div>
+    </div>
+</div>
