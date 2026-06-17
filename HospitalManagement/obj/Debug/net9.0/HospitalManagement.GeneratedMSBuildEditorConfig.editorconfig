@@ -232,6 +232,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNpbmVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/PatientPortal/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFBvcnRhbFxEYXNoYm9hcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/PatientPortal/MyBills.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFBvcnRhbFxNeUJpbGxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/PatientPortal/MyRecords.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFBvcnRhbFxNeVJlY29yZHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/PatientPortal/MyReports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFBvcnRhbFxNeVJlcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/digit/Desktop/Exam/MSC ICT 2/ProjectC\#/HospitalWebApp/HospitalManagement/Views/Patients/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudHNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
