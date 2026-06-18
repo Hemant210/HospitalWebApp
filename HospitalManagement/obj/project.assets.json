@@ -8686,23 +8686,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\digit\\.nuget\\packages\\": {},
+    "C:\\Users\\123\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
+      "projectUniqueName": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
       "projectName": "HospitalManagement",
-      "projectPath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
-      "packagesPath": "C:\\Users\\digit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\digit\\Desktop\\Exam\\MSC ICT 2\\ProjectC#\\HospitalWebApp\\HospitalManagement\\obj\\",
+      "projectPath": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\HospitalManagement.csproj",
+      "packagesPath": "C:\\Users\\123\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\digit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\123\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -8711,7 +8711,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8730,7 +8729,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net9.0": {
@@ -8792,7 +8791,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.102/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

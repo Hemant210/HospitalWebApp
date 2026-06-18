@@ -28,11 +28,11 @@ namespace HospitalManagement.Controllers
 
             // 3. Count Appointments scheduled for Today
             ViewBag.TodaysAppointments = await _context.Appointments
-                .CountAsync(a => a.AppointmentDate.Date == DateTime.Today.Date);
+    .CountAsync(a => a.AppointmentDate.Date == DateTime.Today);
 
             // 4. Count Lab Tests that are still "Pending"
             ViewBag.PendingLabs = await _context.LabTests
-                .CountAsync(l => l.Status == LabTestStatus.Pending);
+    .CountAsync(l => l.Status == LabTestStatus.InProgress);
 
             // 5. NEW: Fetch 5 Doctors for the "Available Specialists" widget
             ViewBag.AvailableDoctors = await _context.Doctors

@@ -1,0 +1,150 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\controllers\\labtestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\labtestscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\controllers\\bedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\bedscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\controllers\\appointmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|c:\\users\\123\\onedrive\\desktop\\.net\\hospitalwebapp\\hospitalmanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{53B8563C-362C-46B3-9217-5074F167AEB7}|HospitalManagement\\HospitalManagement.csproj|solutionrelative:hospitalmanagement\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HospitalManagement\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HospitalManagement\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-17T17:57:46.891Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LabTestsController.cs",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\LabTestsController.cs",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\LabTestsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\LabTestsController.cs",
+              "ViewState": "AgIAAKwAAAAAAAAAAAAAALoAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T19:02:23.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BedsController.cs",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\BedsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\BedsController.cs",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\BedsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\BedsController.cs",
+              "ViewState": "AgIAANMAAAAAAAAAAAAQwOAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T18:57:06.881Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AppointmentsController.cs",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\AppointmentsController.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Controllers\\AppointmentsController.cs",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Controllers\\AppointmentsController.cs",
+              "RelativeToolTip": "HospitalManagement\\Controllers\\AppointmentsController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T18:52:13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "HospitalManagement\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "HospitalManagement\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAABgBAAAAAAAAAAAIwCYBAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-06-17T18:45:11.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Program.cs",
+              "RelativeDocumentMoniker": "HospitalManagement\\Program.cs",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\Program.cs",
+              "RelativeToolTip": "HospitalManagement\\Program.cs",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAIwE0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-17T17:57:12.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\appsettings.json",
+              "RelativeDocumentMoniker": "HospitalManagement\\appsettings.json",
+              "ToolTip": "C:\\Users\\123\\OneDrive\\Desktop\\.Net\\HospitalWebApp\\HospitalManagement\\appsettings.json",
+              "RelativeToolTip": "HospitalManagement\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-17T17:57:10.368Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
